@@ -1,2 +1,0 @@
-
-const hej = 0
