@@ -13,7 +13,7 @@ export default function LoginSignUpView() {
           <Input label="USERNAME" htmlFor="login-input" />
         </div>
         <div className="login-wrapper-two">
-          <Input label="USERNAME" htmlFor="login-input" fieldType="pwd" />
+          <Input label="PASSWORD" htmlFor="login-input" fieldType="pwd" />
         </div>
       </section>
     </div>
