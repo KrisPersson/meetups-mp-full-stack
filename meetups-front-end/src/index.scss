@@ -18,3 +18,12 @@ body {
   height: inherit;
   margin: 0 auto;
 }
+
+.view {
+  background: white;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10rem 1fr 12.5rem;
+}
