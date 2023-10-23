@@ -1,36 +1,68 @@
 import type { AWS } from '@serverless/typescript';
-
-import hello from '@functions/hello';
-
+import {
+  attendMeetUp,
+  createMeetUp,
+  deleteMeetUp,
+  getUpcomingMeetUps,
+  leaveMeetUp,
+  login,
+  profile,
+  signup,
+  updateMeetUp,
+} from '@functions/index';
 const serverlessConfiguration: AWS = {
   service: 'meetups-back-end',
   frameworkVersion: '3',
   plugins: ['serverless-esbuild'],
   provider: {
+    stage: 'dev',
     name: 'aws',
-    runtime: 'nodejs14.x',
+    region: 'eu-north-1',
+    runtime: 'nodejs18.x',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
     },
+    profile: '${env:PROFIlE}',
+    iam: {
+      role: '${env:ROLE}',
+    },
     environment: {
-      AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
-      NODE_OPTIONS: '--enable-source-maps --stack-trace-limit=1000',
+      TABLE: 'Meetups',
+      JWT_SECRET: '${env:JWT_SECRET}',
+    },
+    httpApi: {
+      cors: {
+        allowedOrigins: ['*'],
+        allowedHeaders: ['Content-Type', 'Authorization'],
+        allowedMethods: ['GET', 'POST', 'PUT', 'DELETE'],
+      },
     },
   },
+  useDotenv: true,
   // import the function via paths
-  functions: { hello },
+  functions: {
+    attendMeetUp,
+    createMeetUp,
+    deleteMeetUp,
+    getUpcomingMeetUps,
+    leaveMeetUp,
+    login,
+    profile,
+    signup,
+    updateMeetUp,
+  },
   package: { individually: true },
   custom: {
     esbuild: {
       bundle: true,
       minify: false,
       sourcemap: true,
-      exclude: ['aws-sdk'],
-      target: 'node14',
+      exclude: [],
+      target: 'node18',
       define: { 'require.resolve': undefined },
       platform: 'node',
-      concurrency: 10,
+      concurrency: 15,
     },
   },
 };
