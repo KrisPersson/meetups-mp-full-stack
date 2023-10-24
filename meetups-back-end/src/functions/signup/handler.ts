@@ -1,13 +1,10 @@
-import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/api-gateway';
 import response from '@libs/api-gateway';
 import { middyfy } from '@libs/lambda';
-import validation from '../../middleware/validation'
+import validation from '../../middleware/validation';
 import { saveUser } from './model';
 import { loginSchema } from '@utils/validationSchema';
 
-const signup: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
-  event
-) => {
+const signup = async (event) => {
   try {
     const { username, password } = event.body;
 
@@ -23,6 +20,4 @@ const signup: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   }
 };
 
-export const main = middyfy(signup).use(
-  validation(loginSchema)
-);
+export const main = middyfy(signup).use(validation(loginSchema));
