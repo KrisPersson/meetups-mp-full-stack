@@ -1,17 +1,18 @@
 import response from '@libs/api-gateway';
 import { middyfy } from '@libs/lambda';
 import validation from '../../middleware/validation';
-import { saveUser } from './model';
 import { loginSchema } from '@utils/validationSchema';
+import UserModel from 'src/model/user';
 
 const signup = async (event) => {
   try {
     const { username, password } = event.body;
 
-    await saveUser(username, password);
-    return response.success();
+    await UserModel.saveUser(username, password);
+    return response.success({
+      message: 'Sign up successfully!',
+    });
   } catch (error) {
-    console.log(error);
     if (error.code === 'ConditionalCheckFailedException') {
       error.message = 'Username already exists!';
     }

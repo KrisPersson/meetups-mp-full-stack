@@ -55,13 +55,13 @@ export const createRandomMeetups = (amount: number = 6) => {
     const meetup = {
       PK: meetupId,
       SK: meetupId,
-      title: titles[randomIndex],
-      description,
-      startTime,
-      maxAttendants: randomAttendants,
-      currentAttendants: 0,
-      category: categories[randomIndex],
-      location: location[randomIndex],
+      Title: titles[randomIndex],
+      Description: description,
+      StartTime: startTime,
+      MaxAttendants: randomAttendants,
+      CurrentAttendants: 0,
+      Category: categories[randomIndex],
+      Location: location[randomIndex],
     };
 
     meetups.push(meetup);
