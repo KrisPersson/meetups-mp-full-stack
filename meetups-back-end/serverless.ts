@@ -23,7 +23,7 @@ const serverlessConfiguration: AWS = {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
     },
-    profile: '${env:PROFIlE}',
+    profile: '${env:PROFILE}',
     iam: {
       role: '${env:ROLE}',
     },
