@@ -2,13 +2,12 @@ import type { AWS } from '@serverless/typescript';
 import {
   attendMeetUp,
   createMeetUp,
-  deleteMeetUp,
   getUpcomingMeetUps,
   leaveMeetUp,
   login,
   profile,
   signup,
-  updateMeetUp,
+  submitReview,
 } from '@functions/index';
 const serverlessConfiguration: AWS = {
   service: 'meetups-back-end',
@@ -44,13 +43,12 @@ const serverlessConfiguration: AWS = {
   functions: {
     attendMeetUp,
     createMeetUp,
-    deleteMeetUp,
     getUpcomingMeetUps,
     leaveMeetUp,
     login,
     profile,
     signup,
-    updateMeetUp,
+    submitReview,
   },
   package: { individually: true },
   custom: {

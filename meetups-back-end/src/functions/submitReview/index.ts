@@ -5,8 +5,8 @@ export default {
   events: [
     {
       httpApi: {
-        method: 'DELETE',
-        path: '/api/meetups/{meetupId}',
+        method: 'POST',
+        path: '/api/reviews',
       },
     },
   ],
