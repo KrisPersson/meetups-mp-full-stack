@@ -12,7 +12,7 @@ const signup: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     const { username, password } = event.body;
 
     await saveUser(username, password);
-    return response.success({ message: 'Signup successfully!' });
+    return response.success();
   } catch (error) {
     console.log(error);
     if (error.code === 'ConditionalCheckFailedException') {
