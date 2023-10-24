@@ -9,6 +9,7 @@ import {
   signup,
   submitReview,
 } from '@functions/index';
+import Tables from 'src/yaml/dynamoDB';
 const serverlessConfiguration: AWS = {
   service: 'meetups-back-end',
   frameworkVersion: '3',
@@ -62,6 +63,9 @@ const serverlessConfiguration: AWS = {
       platform: 'node',
       concurrency: 15,
     },
+  },
+  resources: {
+    Resources: Tables,
   },
 };
 
