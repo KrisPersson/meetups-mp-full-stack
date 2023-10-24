@@ -14,11 +14,11 @@ export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<
 >;
 
 const response = {
-  success: (data?: unknown) => {
+  success: (data?: any) => {
     const body = {
       success: true,
+      ...data,
     };
-    if (data) body['data'] = data;
     return {
       statusCode: 200,
       body: JSON.stringify(body),

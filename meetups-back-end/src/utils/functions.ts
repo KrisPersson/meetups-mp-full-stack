@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
-export const generateToken = (meetupId: string) => {
-  return jwt.sign({ meetupId }, process.env.JWT_SECRET, {
+export const generateToken = (username: string) => {
+  return jwt.sign({ username }, process.env.JWT_SECRET, {
     expiresIn: '1d',
   });
 };

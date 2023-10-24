@@ -1,11 +1,31 @@
-import { middyfy } from '@libs/lambda';
 import response from '@libs/api-gateway';
-import { APIGatewayEvent } from 'aws-lambda';
-import validation from '@middleware/validation';
+import { middyfy } from '@libs/lambda';
+import * as bcryptjs from 'bcryptjs';
+import validation from '../../middleware/validation';
 import { loginSchema } from '@utils/validationSchema';
+import { generateToken } from '@utils/functions';
+import UserModel from 'src/model/user';
 
-const login = async (event: APIGatewayEvent) => {
-  return response.success('login');
+const login = async (event) => {
+  try {
+    const { username, password } = event.body;
+    const user = await UserModel.getUser(username);
+    if (!user) {
+      return response.error(400, `Username ${username} does not exist!`);
+    }
+    const isMatch = await UserModel.checkPassword(password, user.Password);
+    if (!isMatch) {
+      return response.error(400, `Password is incorrect!`);
+    }
+
+    const token = generateToken(user.Username);
+    return response.success({
+      message: 'Login in successfully!',
+      token,
+    });
+  } catch (error) {
+    return response.error(error.statusCode, error.message);
+  }
 };
 
 export const main = middyfy(login).use(validation(loginSchema));
