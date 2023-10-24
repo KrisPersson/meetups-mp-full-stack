@@ -1,0 +1,21 @@
+.login-view {
+    background: 
+    no-repeat
+    url('../../assets/background-login.jpg');
+}
+
+.login-forms {
+    grid-row: 2 / span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.login-wrapper-one {
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.login-wrapper-two {
+    padding: 0;
+}

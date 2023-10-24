@@ -1,0 +1,35 @@
+@import "../../scss/mixins";
+
+.header {
+  @include center;
+  grid-column: 1 / span 1;
+}
+
+// .logged-in {
+//   width: fit-content;
+// }
+
+.nav-home {
+  cursor: pointer;
+}
+
+.header__logo {
+  height: 3.2rem;
+  width: 3.2rem;
+  margin-right: 1rem;
+}
+
+.not-logged-in {
+  justify-content: flex-end;
+  padding: 2rem 2rem 0 0;
+  align-self: flex-start;
+}
+
+.logo__title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 3.2rem;
+  color: #fff;
+  @include mainFont;
+  letter-spacing: 3.6px;
+}

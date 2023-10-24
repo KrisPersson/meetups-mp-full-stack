@@ -1,0 +1,19 @@
+@import "./variables";
+
+@mixin mainFont {
+    font-family: $font, sans-serif;
+}
+
+@mixin secondaryFont {
+    font-family: $ptMono, monospace;
+}
+
+@mixin center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin midSection {
+    grid-row: 2 / span 1;
+}
