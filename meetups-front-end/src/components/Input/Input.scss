@@ -46,21 +46,25 @@
 
 .add-border {
   border: 1px black solid;
-  border-radius: 0px 4px 4px 4px;
 }
 
 .remove-border {
   border: none;
+  border-radius: 0px 0px 0px 4px;
 }
 
 .icon-pwd-hidden {
   width: 20%;
   background: no-repeat center url('../../assets/eye-closed-icon.svg');
+  background-color: white;
+  border-radius: 0px 4px 4px 0px;
 }
 
 .icon-pwd-visible {
   width: 20%;
   background: no-repeat center url('../../assets/eye-open-icon.svg');
+  background-color: white;
+  border-radius: 0px 4px 4px 0px;
 }
 
 .big-dots {
