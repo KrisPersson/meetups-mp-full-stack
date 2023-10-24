@@ -27,28 +27,6 @@ const Tables = {
         ReadCapacityUnits: 1,
         WriteCapacityUnits: 1,
       },
-      GlobalSecondaryIndexes: [
-        {
-          IndexName: 'MeetupsIndex',
-          KeySchema: [
-            {
-              AttributeName: 'SK',
-              KeyType: 'HASH',
-            },
-            {
-              AttributeName: 'role',
-              KeyType: 'RANGE',
-            },
-          ],
-          Projection: {
-            ProjectionType: 'ALL',
-          },
-          ProvisionedThroughput: {
-            ReadCapacityUnits: 1,
-            WriteCapacityUnits: 1,
-          },
-        },
-      ],
     },
   },
 };
