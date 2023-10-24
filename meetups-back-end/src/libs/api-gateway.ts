@@ -4,8 +4,13 @@ import type {
   Handler,
 } from 'aws-lambda';
 import type { FromSchema } from 'json-schema-to-ts';
-
-type ValidatedAPIGatewayProxyEvent<S> = Omit<APIGatewayProxyEvent, 'body'> & {
+export interface APIGatewayProxyEventWithUsername extends APIGatewayProxyEvent {
+  username?: string;
+}
+type ValidatedAPIGatewayProxyEvent<S> = Omit<
+  APIGatewayProxyEventWithUsername,
+  'body'
+> & {
   body: FromSchema<S>;
 };
 export type ValidatedEventAPIGatewayProxyEvent<S> = Handler<

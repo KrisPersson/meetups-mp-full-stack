@@ -1,10 +1,14 @@
 import { middyfy } from '@libs/lambda';
-import response from '@libs/api-gateway';
-import { APIGatewayEvent } from 'aws-lambda';
+import response, {
+  ValidatedEventAPIGatewayProxyEvent,
+} from '@libs/api-gateway';
 import { createRandomMeetups } from '@utils/fakeMeetups';
 import db from '@libs/db';
+import schema from './schema';
 
-const updateMeetUp = async (event: APIGatewayEvent) => {
+const updateMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
+  event
+) => {
   const meetups = createRandomMeetups();
 
   const request = meetups.map((meetup) => {

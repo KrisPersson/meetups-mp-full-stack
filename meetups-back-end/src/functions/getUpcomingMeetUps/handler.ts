@@ -1,9 +1,13 @@
 import { middyfy } from '@libs/lambda';
-import response from '@libs/api-gateway';
-import { APIGatewayEvent } from 'aws-lambda';
+import response, {
+  ValidatedEventAPIGatewayProxyEvent,
+} from '@libs/api-gateway';
+import schema from './schema';
 
-const getUpcomingMeetUps = async (event: APIGatewayEvent) => {
-  return response.success('getUpcomingMeetUps');
+const getUpcomingMeetUps: ValidatedEventAPIGatewayProxyEvent<
+  typeof schema
+> = async (event) => {
+  return response.success();
 };
 
 export const main = middyfy(getUpcomingMeetUps);

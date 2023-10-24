@@ -1,8 +1,12 @@
-import response from '@libs/api-gateway';
+import response, {
+  ValidatedEventAPIGatewayProxyEvent,
+} from '@libs/api-gateway';
 import { middyfy } from '@libs/lambda';
-import { APIGatewayEvent } from 'aws-lambda';
+import schema from './schema';
 
-const leaveMeetUp = async (event: APIGatewayEvent) => {
+const leaveMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
+  event
+) => {
   return response.success();
 };
 

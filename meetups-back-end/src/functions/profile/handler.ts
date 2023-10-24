@@ -1,9 +1,14 @@
 import { middyfy } from '@libs/lambda';
-import response from '@libs/api-gateway';
-import { APIGatewayEvent } from 'aws-lambda';
+import response, {
+  ValidatedEventAPIGatewayProxyEvent,
+} from '@libs/api-gateway';
+import checkToken from '@middleware/authentication';
+import schema from './schema';
 
-const profile = async (event: APIGatewayEvent) => {
-  return response.success('profile');
+const profile: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
+  event
+) => {
+  return response.success();
 };
 
-export const main = middyfy(profile);
+export const main = middyfy(profile).use(checkToken());

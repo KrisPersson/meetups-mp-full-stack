@@ -1,10 +1,14 @@
 import { middyfy } from '@libs/lambda';
 
-import response from '@libs/api-gateway';
-import { APIGatewayEvent } from 'aws-lambda';
+import response, {
+  ValidatedEventAPIGatewayProxyEvent,
+} from '@libs/api-gateway';
+import schema from './schema';
 
-const submitReview = async (event: APIGatewayEvent) => {
-  return response.success('submitReview');
+const submitReview: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
+  event
+) => {
+  return response.success();
 };
 
 export const main = middyfy(submitReview);
