@@ -18,7 +18,7 @@ const attendMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     if (isAttended) {
       return response.error(400, 'You already attended this meetup');
     }
-    await MeetupModel.attendMeetup(meetupId);
+    await MeetupModel.updateAmountOfAttendant(meetupId, 1);
     await MeetupModel.storeAttendantForMeetup(meetupId, username);
     return response.success({
       message: 'Attend meetup successfully!',

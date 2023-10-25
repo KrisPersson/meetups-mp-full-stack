@@ -1,4 +1,5 @@
 import response, { APIGatewayProxyEventWithUsername } from '@/libs/api-gateway';
+import { convertDateToNumber } from '@/utils/fakeMeetups';
 import middy from '@middy/core';
 import { APIGatewayProxyResult } from 'aws-lambda';
 import MeetupModel from 'src/model/meetup';
@@ -14,6 +15,11 @@ const checkMeetupExists = () => {
       const meetup = await MeetupModel.getMeetup(meetupId);
       if (!meetup) {
         return response.error(400, 'Meetup does not exist');
+      }
+      const currentTime = convertDateToNumber();
+      const startTime = convertDateToNumber(meetup.StartTime);
+      if (startTime < currentTime) {
+        return response.error(400, 'Meetup has ended. Cannot do this action');
       }
 
       return req.response;
