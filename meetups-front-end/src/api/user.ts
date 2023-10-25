@@ -1,16 +1,11 @@
 import { BASE_URL } from "./index"
 
-interface ApiSignupLoginBody {
-    username: string,
-    password: string
-}
-
-export async function apiSignup(body: ApiSignupLoginBody) {
+export async function apiSignup(username: string, password: string) {
     try {
         const response = await fetch(BASE_URL + "/signup", {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(body)
+            body: JSON.stringify({ username, password })
         })
         const data = await response.json()
         localStorage.setItem('userToken', '')
@@ -21,13 +16,12 @@ export async function apiSignup(body: ApiSignupLoginBody) {
     }
 }
 
-export async function apiLogin(body: ApiSignupLoginBody) {
-    const { username } = body
+export async function apiLogin(username: string, password: string) {
     try {
         const response = await fetch(BASE_URL + "/login", {
             method: "POST",
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(body)
+            body: JSON.stringify({ username, password })
         })
         const data = await response.json()
         localStorage.setItem('userToken', data?.token)
@@ -35,5 +29,21 @@ export async function apiLogin(body: ApiSignupLoginBody) {
         return data
     } catch (error) {
         console.log(error)
+    }
+}
+
+export async function apiGetUserProfile(token: string) {
+    try {
+        const response = await fetch(BASE_URL + "/me", {
+            method: "GET",
+            headers: {
+                'authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        })
+        const data = await response.json()
+        return data
+    } catch (error) {
+        return error
     }
 }
