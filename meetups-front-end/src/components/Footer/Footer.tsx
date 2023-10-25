@@ -22,10 +22,6 @@ export default function Footer(props: Props) {
   return (
     <div className="footer">
       <Button {...props}>{props.buttonText}</Button>
-
-
-
-
     </div >
   );
 }
