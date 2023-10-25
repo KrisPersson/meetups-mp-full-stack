@@ -1,6 +1,6 @@
 import "./Footer.scss";
 import Button from "../Button/Button";
-import { useNavigate } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 interface Props {
   buttonText: string;
   color?: string;
@@ -10,21 +10,22 @@ interface Props {
   radius?: string;
   border?: string;
   type?: string;
+  unannounced?: boolean;
+  registered?: boolean;
+  switchRegisterBtn?: () => void;
   onClick: () => void;
 }
 
 export default function Footer(props: Props) {
-  const navigate = useNavigate();
+
 
   return (
     <div className="footer">
       <Button {...props}>{props.buttonText}</Button>
-      {props.type === "login-view" ? (
-        <p className="footer-text" onClick={() => navigate}>Dont have username? Sign up!</p>
-      ):
-      (
-        null
-      )}
-    </div>
+
+
+
+
+    </div >
   );
 }
