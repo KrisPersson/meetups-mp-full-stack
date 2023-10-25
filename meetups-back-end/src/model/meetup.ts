@@ -28,7 +28,7 @@ const MeetupModel = {
     return Item;
   },
 
-  attendMeetup: async (meetupId: string) => {
+  updateAmountOfAttendant: async (meetupId: string, quantity: number) => {
     return await db
       .update({
         TableName: process.env.TABLE,
@@ -40,9 +40,9 @@ const MeetupModel = {
           '#current': 'CurrentAttendants',
           '#max': 'MaxAttendants',
         },
-        UpdateExpression: 'set #current = #current + :value',
+        UpdateExpression: 'set #current = #current + :quantity',
         ExpressionAttributeValues: {
-          ':value': 1,
+          ':quantity': quantity,
         },
         ConditionExpression: '#current < #max ',
       })
@@ -57,6 +57,18 @@ const MeetupModel = {
           PK: 'MEETUP#' + meetupId,
           SK: 'USER#' + username,
         },
+      })
+      .promise();
+  },
+  removeAttendant: async (meetupId: string, username: string) => {
+    return await db
+      .delete({
+        TableName: process.env.TABLE,
+        Key: {
+          PK: 'MEETUP#' + meetupId,
+          SK: 'USER#' + username,
+        },
+        ConditionExpression: 'attribute_exists(SK)',
       })
       .promise();
   },
