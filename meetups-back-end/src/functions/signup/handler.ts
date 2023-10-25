@@ -1,9 +1,9 @@
 import response, {
   ValidatedEventAPIGatewayProxyEvent,
-} from '@libs/api-gateway';
-import { middyfy } from '@libs/lambda';
+} from '@/libs/api-gateway';
+import { middyfy } from '@/libs/lambda';
 import validation from '../../middleware/validation';
-import { loginSchema } from '@utils/validationSchema';
+import { loginSchema } from '@/utils/validationSchema';
 import UserModel from 'src/model/user';
 import schema from './schema';
 

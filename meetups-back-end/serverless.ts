@@ -8,7 +8,7 @@ import {
   profile,
   signup,
   submitReview,
-} from '@functions/index';
+} from '@/functions/index';
 import Tables from 'src/yaml/dynamoDB';
 const serverlessConfiguration: AWS = {
   service: 'meetups-back-end',

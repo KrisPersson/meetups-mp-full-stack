@@ -1,3 +1,4 @@
+import { IMeetupData } from '@/types/meetup';
 import { generateMeetUpId } from './functions';
 
 const titles = [
@@ -52,8 +53,8 @@ export const createRandomMeetups = (amount: number = 6) => {
     const startTime = createStartTime(
       i % 2 === 0 ? randomExtraDays : -Math.abs(randomExtraDays)
     );
-    const meetup = {
-      PK: meetupId,
+    const meetup: IMeetupData = {
+      PK: 'MEETUP#' + meetupId,
       SK: meetupId,
       Title: titles[randomIndex],
       Description: description,
@@ -74,6 +75,10 @@ function createStartTime(randomExtraDays: number) {
 
   date.setDate(date.getDate() + randomExtraDays);
 
+  return formatDate(date);
+}
+
+export function formatDate(date: Date) {
   return date.toLocaleString(undefined, {
     timeZone: 'Europe/Stockholm',
     hour12: false,
@@ -84,4 +89,8 @@ function createStartTime(randomExtraDays: number) {
     hour: '2-digit',
     minute: '2-digit',
   });
+}
+
+export function convertDateToNumber(date: Date | string = new Date()) {
+  return new Date(date).getTime();
 }

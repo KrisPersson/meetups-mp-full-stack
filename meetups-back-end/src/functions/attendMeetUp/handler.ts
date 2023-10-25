@@ -1,7 +1,7 @@
-import { middyfy } from '@libs/lambda';
+import { middyfy } from '@/libs/lambda';
 import response, {
   ValidatedEventAPIGatewayProxyEvent,
-} from '@libs/api-gateway';
+} from '@/libs/api-gateway';
 import schema from './schema';
 
 const attendMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (

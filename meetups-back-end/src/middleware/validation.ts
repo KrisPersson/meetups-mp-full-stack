@@ -1,9 +1,9 @@
-import response from '@libs/api-gateway';
+import response from '@/libs/api-gateway';
 
 const validation = (schema) => {
   const before = async (req) => {
     try {
-      await schema.validate(req.event.body);
+      req.event.body = await schema.validate(req.event.body);
       return req.response;
     } catch (error) {
       return response.error(400, error.message);

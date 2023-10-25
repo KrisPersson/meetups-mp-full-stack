@@ -1,15 +1,16 @@
-import { middyfy } from '@libs/lambda';
+import { middyfy } from '@/libs/lambda';
 import response, {
   ValidatedEventAPIGatewayProxyEvent,
-} from '@libs/api-gateway';
-import { createRandomMeetups } from '@utils/fakeMeetups';
-import db from '@libs/db';
+} from '@/libs/api-gateway';
+import { createRandomMeetups } from '@/utils/fakeMeetups';
+import db from '@/libs/db';
 import schema from './schema';
+import { IMeetupData } from '@/types/meetup';
 
 const updateMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
-  const meetups = createRandomMeetups();
+  const meetups: IMeetupData[] = createRandomMeetups();
 
   const request = meetups.map((meetup) => {
     return {

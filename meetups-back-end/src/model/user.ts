@@ -1,4 +1,4 @@
-import db from '@libs/db';
+import db from '@/libs/db';
 import * as bcryptjs from 'bcryptjs';
 
 const UserModel = {
@@ -7,7 +7,7 @@ const UserModel = {
       .get({
         TableName: process.env.TABLE,
         Key: {
-          PK: username,
+          PK: 'USER#' + username,
           SK: username,
         },
       })
@@ -23,7 +23,7 @@ const UserModel = {
       .put({
         TableName: process.env.TABLE,
         Item: {
-          PK: username,
+          PK: 'USER#' + username,
           SK: username,
           Password: hash,
         },

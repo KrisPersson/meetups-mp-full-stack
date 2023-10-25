@@ -1,6 +1,6 @@
-import response, { APIGatewayProxyEventWithUsername } from '@libs/api-gateway';
+import response, { APIGatewayProxyEventWithUsername } from '@/libs/api-gateway';
 import middy from '@middy/core';
-import { verifyToken } from '@utils/functions';
+import { verifyToken } from '@/utils/functions';
 import { APIGatewayProxyResult } from 'aws-lambda';
 import UserModel from 'src/model/user';
 
@@ -17,6 +17,7 @@ const checkToken = () => {
     try {
       const decoded = await verifyToken(token);
 
+      console.log(decoded);
       const user = await UserModel.getUser(decoded.username);
       if (!user) {
         return response.error(401, 'Token is invalid');
