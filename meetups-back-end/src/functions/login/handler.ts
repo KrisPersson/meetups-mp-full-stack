@@ -1,11 +1,11 @@
-import { middyfy } from '@libs/lambda';
+import { middyfy } from '@/libs/lambda';
 import validation from '../../middleware/validation';
-import { loginSchema } from '@utils/validationSchema';
-import { generateToken } from '@utils/functions';
+import { loginSchema } from '@/utils/validationSchema';
+import { generateToken } from '@/utils/functions';
 import UserModel from 'src/model/user';
 import response, {
   ValidatedEventAPIGatewayProxyEvent,
-} from '@libs/api-gateway';
+} from '@/libs/api-gateway';
 import schema from './schema';
 
 const login: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
@@ -22,7 +22,7 @@ const login: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       return response.error(400, `Password is incorrect!`);
     }
 
-    const token = generateToken(user.PK);
+    const token = generateToken(user.SK);
     return response.success({
       message: 'Login in successfully!',
       token,
