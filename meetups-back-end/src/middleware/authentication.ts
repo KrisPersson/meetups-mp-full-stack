@@ -9,7 +9,8 @@ const checkToken = () => {
     APIGatewayProxyEventWithUsername,
     APIGatewayProxyResult
   > = async (req) => {
-    const token = req.event.headers.authorization.split(' ')[1];
+    const { authorization } = req.event.headers;
+    const token = authorization.split(' ')[1];
     if (!token) {
       return response.error(401, 'Missing authentication token');
     }
@@ -17,7 +18,6 @@ const checkToken = () => {
     try {
       const decoded = await verifyToken(token);
 
-      console.log(decoded);
       const user = await UserModel.getUser(decoded.username);
       if (!user) {
         return response.error(401, 'Token is invalid');
