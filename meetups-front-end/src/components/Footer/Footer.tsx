@@ -12,7 +12,6 @@ interface Props {
   type?: string;
   unannounced?: boolean;
   registered?: boolean;
-  switchRegisterBtn?: () => void;
   onClick: () => void;
 }
 
