@@ -10,4 +10,9 @@
   width: 31.1rem;
   height: 6.2rem;
   border-radius: 0.8rem;
+  box-shadow: 4px 4px 10px grey;
+}
+
+.button:active {
+  box-shadow: 2px 2px 3px grey;
 }

@@ -23,6 +23,17 @@
   cursor: pointer;
 }
 
+.nav-login-signup {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-login-signup-text {
+  font-size: 4rem;
+  text-shadow: 2px 4px 10px rgb(55, 55, 55);
+}
+
 // .header__logo {
 //   height: 3.2rem;
 //   width: 3.2rem;

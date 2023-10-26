@@ -3,22 +3,17 @@ import "./LoginSignUpView.scss";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Input from "../../components/Input/Input";
+import { apiSignup, apiLogin } from "../../api/user";
 
 export default function LoginSignUpView() {
   const [loginView, setLoginView] = useState(true);
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
 
-  function handleClick() {}
-
   function clickLoginSignUp() {
     loginView
-      ? console.log(
-          `Du är nu inloggad som användare ${usernameInput} med lösenord ${passwordInput}.`
-        )
-      : console.log(
-          `Du är nu registrerad som användare ${usernameInput} med lösenord ${passwordInput}.`
-        );
+      ? apiLogin(usernameInput, passwordInput)
+      : apiSignup(usernameInput, passwordInput);
   }
 
   function switchLoginSignUp() {
@@ -27,7 +22,7 @@ export default function LoginSignUpView() {
 
   return (
     <div className="view login-view">
-      <Header onClick={handleClick} />
+      <Header loginSignUpHeader={true} />
       <section className="login-forms">
         <div className="login-wrapper-one">
           <Input
