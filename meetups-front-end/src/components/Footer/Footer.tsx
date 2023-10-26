@@ -3,11 +3,17 @@ import Button from "../Button/Button";
 
 function checkIfLoginSignUpPage({ loginView, switchLoginSignUp }: Props) {
   return loginView ? (
-    <button className="footer-switchlogin-text" onClick={() => switchLoginSignUp?.()}>
+    <button
+      className="footer-switchlogin-text"
+      onClick={() => switchLoginSignUp?.()}
+    >
       Don't have a user? Sign up!
     </button>
   ) : (
-    <button className="footer-switchlogin-text" onClick={() => switchLoginSignUp?.()}>
+    <button
+      className="footer-switchlogin-text"
+      onClick={() => switchLoginSignUp?.()}
+    >
       Already have a user? Login!
     </button>
   );
@@ -21,6 +27,8 @@ interface Props {
   height?: string;
   radius?: string;
   border?: string;
+  unannounced?: boolean;
+  registered?: boolean;
   loginView?: boolean;
   thisIsLoginSignUpPage?: boolean;
   switchLoginSignUp?: () => void;
