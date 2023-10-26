@@ -19,7 +19,7 @@ export default function MeetupsView() {
   async function fetchMeetups() {
     const dataFromDb = await apiGetUpcomingMeetUps(
       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imphbm5lIiwiaWF0IjoxNjk4MzIwNjk3LCJleHAiOjE2OTg0MDcwOTd9.WmapCLhVEiZRflztpZL0NhXIEXhb4o93YlxnbqeLY6A" ||
-        ""
+      ""
     );
     setMeetupItems([...dataFromDb.meetups]);
   }
@@ -27,30 +27,22 @@ export default function MeetupsView() {
   const renderedMeetupItems =
     meetupItems.length > 0
       ? meetupItems.map((meetup) => (
-          <section
-            key={meetup.PK}
-            className="meetups"
-            onClick={() => seeMeetup(meetup)()}
-          >
-            <h2 className="meetups__meetupsTitle">{meetup.Title}</h2>
-            <p>
-              {meetup.StartTime} | {meetup.Location} |{" "}
-              {truncate(meetup.Description, 40)} | {meetup.host}
-            </p>
-          </section>
-        ))
+        <section
+          key={meetup.PK}
+          className="meetups"
+          onClick={() => seeMeetup(meetup)()}
+        >
+          <h2 className="meetups__meetupsTitle">{meetup.Title}</h2>
+          <p>
+            {meetup.StartTime} | {meetup.Location} |{" "}
+            {truncate(meetup.Description, 40)} | {meetup.host}
+          </p>
+        </section>
+      ))
       : [];
 
-  type Meetup = {
-    meetupId: number;
-    title: string;
-    date: string;
-    venue: string;
-    shortInfo: string;
-    host: string;
-  };
 
-  function seeMeetup(meetup: Meetup) {
+  function seeMeetup(meetup: MeetupFromDb) {
     return function () {
       navigate("/detail/", { state: { meetup: meetup } });
     };
