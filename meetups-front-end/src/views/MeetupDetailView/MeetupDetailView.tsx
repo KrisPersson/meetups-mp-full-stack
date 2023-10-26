@@ -2,9 +2,13 @@ import "./MeetupDetailView.scss";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import { useState } from "react";
+import { useLocation } from 'react-router-dom';
+
 
 
 export default function MeetupDetailView() {
+  const location = useLocation();
+  const meetup = location.state.meetup;
 
   const [registered, setRegistered] = useState(false);
 
@@ -21,13 +25,13 @@ export default function MeetupDetailView() {
   }
   function handleClick() { }
 
-  const title = "Hundar utan öron";
-  const date = "2021-09-01";
-  const venue = "Hundparken";
-  const info = "Vi träffas och pratar om hundar utan öron lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-  const host = "Brukshundsklbben";
-  const numberOfAttendees = 5;
-  const maxNumberOfAttendees = 10;
+  const title = meetup.title;
+  const date = meetup.date;
+  const venue = meetup.venue;
+  const info = meetup.info;
+  const host = meetup.host;
+  const numberOfAttendees = meetup.numberOfAttendees;
+  const maxNumberOfAttendees = meetup.maxNumberOfAttendees;
   const reviews = [
     {
       name: "Kalle",
@@ -55,8 +59,8 @@ export default function MeetupDetailView() {
       review: "Det är sista gången jag tar min katt Göran på detta event!!"
     }
   ];
-  const reviewItems = reviews.map((review) =>
-    <li> Namn: {review.name} Betyg: {review.rating} Kommentar: {review.review}</li>
+  const reviewItems = reviews.map((review, index) =>
+    <li key={+index}> Namn: {review.name} Betyg: {review.rating} Kommentar: {review.review}</li>
   );
 
 
@@ -69,21 +73,21 @@ export default function MeetupDetailView() {
       <h2>Info: {info}</h2>
       <h2>Arrangör: {host}</h2>
       <h2>Anmälda: {numberOfAttendees}/{maxNumberOfAttendees}</h2>
-      <h2>Recensioner: {reviewItems} </h2>
+      <h2>Recensioner: <ul>{reviewItems}</ul> </h2>
     </section>
     {registered ? (
       <Footer
         buttonText="Avregistrera mig!"
         registered={false}
         onClick={clickToUnregister}
-        switchRegisterBtn={switchRegisterBtn}
+      //switchRegisterBtn={switchRegisterBtn}
       />
     ) : (
       <Footer
         buttonText="Anmäl mig!"
         registered={true}
         onClick={clickToRegister}
-        switchRegisterBtn={switchRegisterBtn}
+      //switchRegisterBtn={switchRegisterBtn}
       />
     )}
   </div>;
