@@ -37,8 +37,7 @@ export async function apiGetUserProfile(token: string) {
         const response = await fetch(BASE_URL + "/me", {
             method: "GET",
             headers: {
-                'authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'authorization': `Bearer ${token}`
             }
         })
         const data = await response.json()

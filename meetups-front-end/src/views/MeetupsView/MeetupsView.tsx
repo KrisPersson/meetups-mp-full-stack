@@ -41,7 +41,6 @@ export default function MeetupsView() {
       ))
       : [];
 
-
   function seeMeetup(meetup: MeetupFromDb) {
     return function () {
       navigate("/detail/", { state: { meetup: meetup } });
