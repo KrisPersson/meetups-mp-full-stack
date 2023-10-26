@@ -9,3 +9,16 @@ export interface Meetup {
     maxNumberOfAttendees?: number;
     numberOfAttendees?: number;
 }
+
+export interface MeetupFromDb {
+    Title: string;
+    Location: string;
+    StartTime: string;
+    Description: string;
+    Host?: string;
+    PK: string;
+    SK: string;
+    MaxAttendants: number;
+    CurrentAttendants: number;
+    Category?: string;
+  }

@@ -6,10 +6,11 @@ import { apiGetUpcomingMeetUps } from "../../api/meetups";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { truncate } from "../../utils/index";
+import { MeetupFromDb } from "../../types/index";
 
 export default function MeetupsView() {
   const navigate = useNavigate();
-  const [meetupItems, setMeetupItems] = useState<Meetup[]>([]);
+  const [meetupItems, setMeetupItems] = useState<MeetupFromDb[]>([]);
 
   useEffect(() => {
     fetchMeetups();

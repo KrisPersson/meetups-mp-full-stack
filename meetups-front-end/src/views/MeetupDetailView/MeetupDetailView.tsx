@@ -3,19 +3,7 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-
-interface MeetupFromDb {
-  Title: string;
-  Location: string;
-  StartTime: string;
-  Description: string;
-  Host?: string;
-  PK: string;
-  SK: string;
-  MaxAttendants: number;
-  CurrentAttendants: number;
-  Category?: string;
-}
+import { MeetupFromDb } from "../../types/index";
 
 export default function MeetupDetailView() {
   const location = useLocation();
