@@ -43,7 +43,7 @@ export default function MeetupsView() {
         <Input label="Sök event" htmlFor="search" />
         <button onClick={handleClick}>Hitta event till mig </button>
       </div>
-      <section className="events-container">
+      <section className="show-all-upcoming-meetups-container">
         {meetupItems}
       </section>
     </section>
