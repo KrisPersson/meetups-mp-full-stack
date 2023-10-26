@@ -1,12 +1,11 @@
-import response, { APIGatewayProxyEventWithUsername } from '@/libs/api-gateway';
-import { convertDateToNumber } from '@/utils/fakeMeetups';
+import response, { CustomAPIGatewayProxyEvent } from '@/libs/api-gateway';
 import middy from '@middy/core';
 import { APIGatewayProxyResult } from 'aws-lambda';
 import MeetupModel from 'src/model/meetup';
 
 const checkMeetupExists = () => {
   const before: middy.MiddlewareFn<
-    APIGatewayProxyEventWithUsername,
+    CustomAPIGatewayProxyEvent,
     APIGatewayProxyResult
   > = async (req) => {
     const { meetupId } = req.event.pathParameters;
@@ -16,11 +15,8 @@ const checkMeetupExists = () => {
       if (!meetup) {
         return response.error(400, 'Meetup does not exist');
       }
-      const currentTime = convertDateToNumber();
-      const startTime = convertDateToNumber(meetup.StartTime);
-      if (startTime < currentTime) {
-        return response.error(400, 'Meetup has ended. Cannot do this action');
-      }
+
+      req.event.startTime = meetup.StartTime;
 
       return req.response;
     } catch (error) {

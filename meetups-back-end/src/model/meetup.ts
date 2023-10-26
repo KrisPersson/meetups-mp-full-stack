@@ -1,18 +1,20 @@
 import db from '@/libs/db';
+import { convertDateToNumber } from '@/utils/fakeMeetups';
 
 const MeetupModel = {
   getMeetup: async (meetupId: string) => {
-    const { Item } = await db
+    const data = await db
       .get({
         TableName: process.env.TABLE,
         Key: {
           PK: 'MEETUP#' + meetupId,
           SK: meetupId,
         },
+        ReturnConsumedCapacity: 'NONE',
       })
       .promise();
 
-    return Item;
+    return data.Item;
   },
 
   getAttendant: async (meetupId: string, username: string) => {
@@ -71,6 +73,11 @@ const MeetupModel = {
         ConditionExpression: 'attribute_exists(SK)',
       })
       .promise();
+  },
+  hasEnded: (StartTime: string) => {
+    const currentTime = convertDateToNumber();
+    const startTime = convertDateToNumber(StartTime);
+    return currentTime > startTime;
   },
 };
 

@@ -6,7 +6,7 @@ import schema from './schema';
 import checkToken from '@/middleware/authentication';
 import db from '@/libs/db';
 import { IMeetupData } from '@/types/meetup';
-import { convertDateToNumber } from '@/utils/fakeMeetups';
+import MeetupModel from 'src/model/meetup';
 
 const getUpcomingMeetUps: ValidatedEventAPIGatewayProxyEvent<
   typeof schema
@@ -21,9 +21,9 @@ const getUpcomingMeetUps: ValidatedEventAPIGatewayProxyEvent<
     })
     .promise();
   if (!Items) return response.success({ message: 'No upcoming meetups' });
-  const currentTime = convertDateToNumber();
+
   const upcomingMeetups = Items.filter((item: IMeetupData) => {
-    return convertDateToNumber(item.StartTime) >= currentTime;
+    return !MeetupModel.hasEnded(item.StartTime);
   });
 
   return response.success({

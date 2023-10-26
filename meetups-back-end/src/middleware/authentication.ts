@@ -1,4 +1,4 @@
-import response, { APIGatewayProxyEventWithUsername } from '@/libs/api-gateway';
+import response, { CustomAPIGatewayProxyEvent } from '@/libs/api-gateway';
 import middy from '@middy/core';
 import { verifyToken } from '@/utils/functions';
 import { APIGatewayProxyResult } from 'aws-lambda';
@@ -6,7 +6,7 @@ import UserModel from 'src/model/user';
 
 const checkToken = () => {
   const before: middy.MiddlewareFn<
-    APIGatewayProxyEventWithUsername,
+    CustomAPIGatewayProxyEvent,
     APIGatewayProxyResult
   > = async (req) => {
     const { authorization } = req.event.headers;

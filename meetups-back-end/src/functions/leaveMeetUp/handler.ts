@@ -11,8 +11,11 @@ const leaveMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
   const { meetupId } = event.pathParameters;
-  const { username } = event;
-
+  const { username, startTime } = event;
+  const hasEnded = MeetupModel.hasEnded(startTime);
+  if (hasEnded) {
+    return response.error(400, 'Meetup has ended. Cannot do this action');
+  }
   try {
     await MeetupModel.removeAttendant(meetupId, username);
     await MeetupModel.updateAmountOfAttendant(meetupId, -1);
