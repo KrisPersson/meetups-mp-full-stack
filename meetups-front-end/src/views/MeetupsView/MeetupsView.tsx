@@ -41,16 +41,7 @@ export default function MeetupsView() {
         ))
       : [];
 
-  type Meetup = {
-    meetupId: number;
-    title: string;
-    date: string;
-    venue: string;
-    shortInfo: string;
-    host: string;
-  };
-
-  function seeMeetup(meetup: Meetup) {
+  function seeMeetup(meetup: MeetupFromDb) {
     return function () {
       navigate("/detail/", { state: { meetup: meetup } });
     };

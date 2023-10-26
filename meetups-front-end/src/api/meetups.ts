@@ -44,7 +44,10 @@ export async function apiSubmitReview(token: string, meetupId: string, review: s
     try {
         const response = await fetch(BASE_URL + `/review`, {
             method: "POST",
-            
+            headers: {
+                'authorization': `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify(body)
         })
         const data = await response.json()
