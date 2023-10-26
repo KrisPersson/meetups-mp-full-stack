@@ -15,8 +15,12 @@ const submitReview: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
 ) => {
   const { reviewing, rating, meetupId } = event.body;
 
-  const { username, startTime } = event;
-  const hasEnded = MeetupModel.hasEnded(startTime);
+  const meetup = await MeetupModel.findMeetup(meetupId);
+  if (!meetup) {
+    return response.error(400, 'Meetup does not exist');
+  }
+  const { username } = event;
+  const hasEnded = MeetupModel.hasEnded(meetup.StartTime);
   if (!hasEnded) {
     return response.error(400, 'Meetup has not ended. Cannot do this action');
   }
@@ -46,7 +50,9 @@ const submitReview: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
         ConditionExpression: 'attribute_exists(SK)',
       })
       .promise();
-    return response.success();
+    return response.success({
+      message: 'Submit review successfully!',
+    });
   } catch (error) {
     if (error.code === 'ConditionalCheckFailedException') {
       return response.error(400, 'You are not attending this meetup');

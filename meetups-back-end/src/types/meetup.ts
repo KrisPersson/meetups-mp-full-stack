@@ -6,6 +6,7 @@ export interface Meetup {
   CurrentAttendants: number;
   Category: string;
   Location: string;
+  Host: string;
 }
 
 export interface IMeetupData extends Meetup {

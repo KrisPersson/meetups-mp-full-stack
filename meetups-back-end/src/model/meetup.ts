@@ -2,7 +2,7 @@ import db from '@/libs/db';
 import { convertDateToNumber } from '@/utils/fakeMeetups';
 
 const MeetupModel = {
-  getMeetup: async (meetupId: string) => {
+  findMeetup: async (meetupId: string) => {
     const data = await db
       .get({
         TableName: process.env.TABLE,
@@ -40,13 +40,11 @@ const MeetupModel = {
         },
         ExpressionAttributeNames: {
           '#current': 'CurrentAttendants',
-          '#max': 'MaxAttendants',
         },
         UpdateExpression: 'set #current = #current + :quantity',
         ExpressionAttributeValues: {
           ':quantity': quantity,
         },
-        ConditionExpression: '#current < #max ',
       })
       .promise();
   },
@@ -59,6 +57,7 @@ const MeetupModel = {
           PK: 'MEETUP#' + meetupId,
           SK: 'USER#' + username,
         },
+        ConditionExpression: 'attribute_not_exists(SK)',
       })
       .promise();
   },
@@ -78,6 +77,10 @@ const MeetupModel = {
     const currentTime = convertDateToNumber();
     const startTime = convertDateToNumber(StartTime);
     return currentTime > startTime;
+  },
+
+  meetUpFull: (CurrentAttendants: number, MaxAttendants: number) => {
+    return CurrentAttendants === MaxAttendants;
   },
 };
 

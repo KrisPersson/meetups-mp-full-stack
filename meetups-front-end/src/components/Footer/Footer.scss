@@ -9,8 +9,16 @@
   flex-direction: column;
 }
 
-.footer-text {
-  font-size: 1.8rem;
-  color: rgb(248, 229, 254);
-  margin-bottom: 0;
+.footer-switchlogin-text {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.65);
+  margin: .5rem 0 0 0;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.footer-switchlogin-text:hover {
+  color: rgb(0, 0, 0);
 }

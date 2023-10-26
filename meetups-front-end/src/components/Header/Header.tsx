@@ -6,8 +6,8 @@ type Props = {
   showHomeBtn?: boolean;
   showMyPageBtn?: boolean;
   backButton?: boolean;
-  profileButton?: boolean;
-  onClick: () => void;
+  loginSignUpHeader?: boolean;
+  onClick?: () => void;
 };
 
 export default function Header(props: Props) {
@@ -20,7 +20,6 @@ export default function Header(props: Props) {
           <h1 className="nav-home" onClick={() => navigate("/")}>
             HOME
           </h1>
-
         </div>
       ) : null}
       {props.showMyPageBtn ? (
@@ -30,9 +29,13 @@ export default function Header(props: Props) {
           </h1>
         </div>
       ) : null}
+      {props.loginSignUpHeader ? (
+        <div className="nav-login-signup">
+          <h1 className="nav-login-signup-text">
+            MEETUP
+          </h1>
+        </div>
+      ) : null}
     </header>
-
-
-
   );
 }

@@ -20,10 +20,13 @@ const getUpcomingMeetUps: ValidatedEventAPIGatewayProxyEvent<
       },
     })
     .promise();
-  if (!Items) return response.success({ message: 'No upcoming meetups' });
+  if (!Items || Items.length === 0)
+    return response.success({ message: 'No upcoming meetups' });
 
   const upcomingMeetups = Items.filter((item: IMeetupData) => {
-    return !MeetupModel.hasEnded(item.StartTime);
+    return (
+      !MeetupModel.hasEnded(item.StartTime) && !item.SK.startsWith('USER#')
+    );
   });
 
   return response.success({

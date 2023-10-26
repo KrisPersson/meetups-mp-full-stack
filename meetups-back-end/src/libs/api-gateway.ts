@@ -1,4 +1,3 @@
-import { IMeetupData } from '@/types/meetup';
 import type {
   APIGatewayProxyEvent,
   APIGatewayProxyResult,
@@ -7,7 +6,6 @@ import type {
 import type { FromSchema } from 'json-schema-to-ts';
 export interface CustomAPIGatewayProxyEvent extends APIGatewayProxyEvent {
   username?: string;
-  startTime?: string;
 }
 type ValidatedAPIGatewayProxyEvent<S> = Omit<
   CustomAPIGatewayProxyEvent,

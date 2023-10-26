@@ -4,18 +4,22 @@ import response, {
 import { middyfy } from '@/libs/lambda';
 import schema from './schema';
 import checkToken from '@/middleware/authentication';
-import checkMeetupExists from '@/middleware/checkMeetupExists';
 import MeetupModel from 'src/model/meetup';
 
 const leaveMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
   const { meetupId } = event.pathParameters;
-  const { username, startTime } = event;
-  const hasEnded = MeetupModel.hasEnded(startTime);
+  const { username } = event;
+  const meetup = await MeetupModel.findMeetup(meetupId);
+  if (!meetup) {
+    return response.error(400, 'Meetup does not exist');
+  }
+  const hasEnded = MeetupModel.hasEnded(meetup.StartTime);
   if (hasEnded) {
     return response.error(400, 'Meetup has ended. Cannot do this action');
   }
+
   try {
     await MeetupModel.removeAttendant(meetupId, username);
     await MeetupModel.updateAmountOfAttendant(meetupId, -1);
@@ -30,6 +34,4 @@ const leaveMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   }
 };
 
-export const main = middyfy(leaveMeetUp)
-  .use(checkToken())
-  .use(checkMeetupExists());
+export const main = middyfy(leaveMeetUp).use(checkToken());
