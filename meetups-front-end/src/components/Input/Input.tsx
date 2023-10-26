@@ -28,9 +28,6 @@ function InsertTypeOfField({
           type={textOrDots}
           id={htmlFor}
           className={`input-text-field remove-border ${maskedOrNot}`}
-          // defaultValue=""
-          // ref={passwordInput}
-          // onChange={(e) => onChange && onChange(e)}
           value={inputValue}
           onChange={(e) => setInputValue && setInputValue(e.target.value)}
         />
