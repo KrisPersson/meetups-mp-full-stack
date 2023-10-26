@@ -1,0 +1,22 @@
+.meetupDetail-view{
+    background-color: rgb(191, 193, 183);
+}
+
+.detail-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    width: 80%;
+    
+}
+h1{
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+li{
+    list-style: none;
+}

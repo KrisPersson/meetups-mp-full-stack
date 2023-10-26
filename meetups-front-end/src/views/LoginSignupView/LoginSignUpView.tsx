@@ -1,8 +1,10 @@
 import { useState } from "react";
 import "./LoginSignUpView.scss";
 import Footer from "../../components/Footer/Footer";
+import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
 
 export default function LoginSignUpView() {
   const [loginView, setLoginView] = useState(true);
@@ -10,6 +12,8 @@ export default function LoginSignUpView() {
   const [passwordInput, setPasswordInput] = useState("");
 
   // Nedanstående funktion ska tas bort efter att jag pull:at Pablos version (tror jag)
+  function clickLogin() {}
+
   function handleClick() {}
 
   function clickLoginSignUp() {
@@ -27,6 +31,7 @@ export default function LoginSignUpView() {
   }
 
   return (
+    <div className="view login-view">
     <div className="view login-view">
       <Header isLoggedIn={true} onClick={handleClick} />
       <section className="login-forms">

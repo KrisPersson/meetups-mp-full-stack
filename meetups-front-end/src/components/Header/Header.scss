@@ -2,34 +2,44 @@
 
 .header {
   @include center;
-  grid-column: 1 / span 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
 }
 
-// .logged-in {
-//   width: fit-content;
-// }
-
+.home{
+  margin-left: 2rem;
+  margin-right: auto;
+}
+.myPage{
+  margin-right: 2rem;
+  margin-left: auto;
+}
 .nav-home {
   cursor: pointer;
 }
-
-.header__logo {
-  height: 3.2rem;
-  width: 3.2rem;
-  margin-right: 1rem;
+.nav-myPage {
+  cursor: pointer;
 }
 
-.not-logged-in {
-  justify-content: flex-end;
-  padding: 2rem 2rem 0 0;
-  align-self: flex-start;
-}
+// .header__logo {
+//   height: 3.2rem;
+//   width: 3.2rem;
+//   margin-right: 1rem;
+// }
 
-.logo__title {
-  font-size: 2.4rem;
-  font-weight: 700;
-  line-height: 3.2rem;
-  color: #fff;
-  @include mainFont;
-  letter-spacing: 3.6px;
-}
+// .not-logged-in {
+//   justify-content: flex-end;
+//   padding: 2rem 2rem 0 0;
+//   align-self: flex-start;
+// }
+
+// .logo__title {
+//   font-size: 2.4rem;
+//   font-weight: 700;
+//   line-height: 3.2rem;
+//   color: #fff;
+//   @include mainFont;
+//   letter-spacing: 3.6px;
+// }

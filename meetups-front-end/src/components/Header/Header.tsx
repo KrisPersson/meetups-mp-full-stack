@@ -1,9 +1,10 @@
 import "./Header.scss";
-import Button from "../Button/Button";
+//import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
-  isLoggedIn: boolean;
+  showHomeBtn?: boolean;
+  showMyPageBtn?: boolean;
   backButton?: boolean;
   profileButton?: boolean;
   onClick: () => void;
@@ -13,31 +14,25 @@ export default function Header(props: Props) {
   const navigate = useNavigate();
 
   return (
-    <>
-      {props.isLoggedIn ? (
-        <div className="header logged-in">
+    <header className="header">
+      {props.showHomeBtn ? (
+        <div className="home">
           <h1 className="nav-home" onClick={() => navigate("/")}>
             HOME
           </h1>
+
         </div>
-      ) : (
-        <div className="header not-logged-in">
-          <Button
-            width="fit-content"
-            height="fit-content"
-            radius="0.3rem"
-            border="solid 0.1rem #ff4910"
-            backgroundColor="transparent"
-            color="#ff4910"
-            fontFamily="Open Sans"
-            fontWeight="400"
-            padding="0.3rem 0.6rem 0.3rem 0.6rem"
-            onClick={props.onClick}
-          >
-            Sign up
-          </Button>
+      ) : null}
+      {props.showMyPageBtn ? (
+        <div className="myPage">
+          <h1 className="nav-myPage" onClick={() => navigate("/profile")}>
+            MIN SIDA
+          </h1>
         </div>
-      )}
-    </>
+      ) : null}
+    </header>
+
+
+
   );
 }
