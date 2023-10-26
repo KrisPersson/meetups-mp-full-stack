@@ -1,6 +1,24 @@
 import "./Footer.scss";
 import Button from "../Button/Button";
-//import { useNavigate } from "react-router-dom";
+
+function checkIfLoginSignUpPage({ loginView, switchLoginSignUp }: Props) {
+  return loginView ? (
+    <button
+      className="footer-switchlogin-text"
+      onClick={() => switchLoginSignUp?.()}
+    >
+      Don't have a user? Sign up!
+    </button>
+  ) : (
+    <button
+      className="footer-switchlogin-text"
+      onClick={() => switchLoginSignUp?.()}
+    >
+      Already have a user? Login!
+    </button>
+  );
+}
+
 interface Props {
   buttonText: string;
   color?: string;
@@ -9,18 +27,19 @@ interface Props {
   height?: string;
   radius?: string;
   border?: string;
-  type?: string;
-  unannounced?: boolean;
-  registered?: boolean;
+  loginView?: boolean;
+  thisIsLoginSignUpPage?: boolean;
+  switchLoginSignUp?: () => void;
   onClick: () => void;
 }
 
 export default function Footer(props: Props) {
-
-
   return (
     <div className="footer">
       <Button {...props}>{props.buttonText}</Button>
-    </div >
+      {props.thisIsLoginSignUpPage
+        ? checkIfLoginSignUpPage({ ...props })
+        : null}
+    </div>
   );
 }

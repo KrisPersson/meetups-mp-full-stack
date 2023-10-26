@@ -65,35 +65,27 @@ export default function MeetupDetailView() {
     </li>
   ));
 
-  return (
-    <div className="view meetupDetail-view">
-      <Header showHomeBtn={true} showMyPageBtn={true} onClick={handleClick} />
-      <section className="detail-container">
-        <h1>{title}</h1>
-        <h2>Datum: {date}</h2>
-        <h2>Plats: {venue}</h2>
-        <h2>Info: {info}</h2>
-        <h2>Arrangör: {host}</h2>
-        <h2>
-          Anmälda: {numberOfAttendees}/{maxNumberOfAttendees}
-        </h2>
-        <h2>
-          Recensioner: <ul>{reviewItems}</ul>{" "}
-        </h2>
-      </section>
-      {registered ? (
-        <Footer
-          buttonText="Avregistrera mig!"
-          registered={false}
-          onClick={clickToUnregister}
-        />
-      ) : (
-        <Footer
-          buttonText="Anmäl mig!"
-          registered={true}
-          onClick={clickToRegister}
-        />
-      )}
-    </div>
-  );
+  return <div className="view meetupDetail-view">
+    <Header showHomeBtn={true} showMyPageBtn={true} onClick={handleClick} />
+    <section className="detail-container">
+      <h1>{title}</h1>
+      <h2>Datum: {date}</h2>
+      <h2>Plats: {venue}</h2>
+      <h2>Info: {info}</h2>
+      <h2>Arrangör: {host}</h2>
+      <h2>Anmälda: {numberOfAttendees}/{maxNumberOfAttendees}</h2>
+      <h2>Recensioner: <ul>{reviewItems}</ul> </h2>
+    </section>
+    {registered ? (
+      <Footer
+        buttonText="Avregistrera mig!"
+        onClick={clickToUnregister}
+      />
+    ) : (
+      <Footer
+        buttonText="Anmäl mig!"
+        onClick={clickToRegister}
+      />
+    )}
+  </div>;
 }
