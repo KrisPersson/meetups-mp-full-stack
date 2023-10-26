@@ -1,20 +1,12 @@
-/* <<< INFORMATION >>>
- * label = Namnet som visas ovanför input-fältet.
- *   Exempel: "PASSWORD" eller "USERNAME"
- * htmlFor = Det som binder samman label och input-fältet (så klickar man på label:en så ställer sig markören i inputfältet).
- *    Exempel: "login-pwd-field" eller "login-user-field."
- * fieldType = "genPwd", "pwd" eller inget/valfritt. pwd genererar ett lösenordsfält, genPwd genererar ett
- * lösenordsgenereringsfält, och inget/valfritt skapar automatiskt ett "vanligt" input-fält utan krusiduller.
- *
- * Fullständigt exempel: <Input label="PASSWORD" htmlFor="login-pwd-field" fieldType="pwd" />
- */
-
-import { useState, useRef } from "react";
+import { useState } from "react";
 import "./Input.scss";
 
-function InsertTypeOfField({ htmlFor, fieldType, onChange }: InputProps) {
-  const usernameInput = useRef(null);
-  const passwordInput = useRef(null);
+function InsertTypeOfField({
+  htmlFor,
+  fieldType,
+  inputValue,
+  setInputValue,
+}: InputProps) {
   const [isPasswordMasked, setIsPasswordMasked] = useState(true);
 
   if (fieldType === "pwd") {
@@ -36,9 +28,11 @@ function InsertTypeOfField({ htmlFor, fieldType, onChange }: InputProps) {
           type={textOrDots}
           id={htmlFor}
           className={`input-text-field remove-border ${maskedOrNot}`}
-          defaultValue=""
-          ref={passwordInput}
-          onChange={(e) => onChange && onChange(e)}
+          // defaultValue=""
+          // ref={passwordInput}
+          // onChange={(e) => onChange && onChange(e)}
+          value={inputValue}
+          onChange={(e) => setInputValue && setInputValue(e.target.value)}
         />
         <div
           className={iconType}
@@ -56,9 +50,11 @@ function InsertTypeOfField({ htmlFor, fieldType, onChange }: InputProps) {
         type="text"
         id={htmlFor}
         className="input-text-field"
-        defaultValue=""
-        ref={usernameInput}
-        onChange={(e) => onChange && onChange(e)}
+        // defaultValue=""
+        // ref={usernameInput}
+        // onChange={(e) => onChange && onChange(e)}
+        value={inputValue}
+        onChange={(e) => setInputValue && setInputValue(e.target.value)}
       />
     );
   }
@@ -69,7 +65,8 @@ type InputProps = {
   htmlFor: string;
   fieldType?: string;
   value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  inputValue?: string;
+  setInputValue?: (value: string) => void;
 };
 
 export default function Input(props: InputProps) {
