@@ -5,6 +5,7 @@ import { apiGetUpcomingMeetUps } from "../../api/meetups";
 // import meetupArr from "../../components/Meetups/Meetups";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { truncate } from "../../utils/index";
 
 export default function MeetupsView() {
   const navigate = useNavigate();
@@ -20,10 +21,6 @@ export default function MeetupsView() {
         ""
     );
     setMeetupItems([...dataFromDb.meetups]);
-  }
-
-  function truncate(str: string, n: number) {
-    return str.length > n ? str.slice(0, n - 1) + "..." : str;
   }
 
   const renderedMeetupItems =
