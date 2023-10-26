@@ -25,7 +25,7 @@ export async function apiLogin(username: string, password: string) {
         })
         const data = await response.json()
         localStorage.setItem('userToken', data?.token)
-        localStorage.setItem('username', username)
+        localStorage.setItem('username', data?.username)
         return data
     } catch (error) {
         console.log(error)
