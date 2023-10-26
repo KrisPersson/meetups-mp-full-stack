@@ -27,8 +27,6 @@ interface Props {
   height?: string;
   radius?: string;
   border?: string;
-  unannounced?: boolean;
-  registered?: boolean;
   loginView?: boolean;
   thisIsLoginSignUpPage?: boolean;
   switchLoginSignUp?: () => void;

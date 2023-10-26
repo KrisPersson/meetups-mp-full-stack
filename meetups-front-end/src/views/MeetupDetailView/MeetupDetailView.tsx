@@ -78,13 +78,11 @@ export default function MeetupDetailView() {
     {registered ? (
       <Footer
         buttonText="Avregistrera mig!"
-        registered={false}
         onClick={clickToUnregister}
       />
     ) : (
       <Footer
         buttonText="Anmäl mig!"
-        registered={true}
         onClick={clickToRegister}
       />
     )}
