@@ -25,7 +25,7 @@ export async function apiLogin(username: string, password: string) {
         })
         const data = await response.json()
         localStorage.setItem('userToken', data?.token)
-        localStorage.setItem('username', username)
+        localStorage.setItem('username', data?.username)
         return data
     } catch (error) {
         console.log(error)
@@ -37,8 +37,7 @@ export async function apiGetUserProfile(token: string) {
         const response = await fetch(BASE_URL + "/me", {
             method: "GET",
             headers: {
-                'authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'authorization': `Bearer ${token}`
             }
         })
         const data = await response.json()

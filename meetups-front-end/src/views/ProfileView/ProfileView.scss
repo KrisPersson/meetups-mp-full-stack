@@ -1,0 +1,36 @@
+.profile-container{
+    overflow-y: scroll;
+}
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.upcoming-events-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 1rem;
+        margin-left: 5rem;
+        margin-right: 5rem;
+        border: 1px solid rgb(145, 145, 145);
+        overflow-y: scroll;
+        height: 20rem;
+}
+
+.passed-events-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    margin-left: 5rem;
+    margin-right: 5rem;
+    border: 1px solid rgb(145, 145, 145);
+    overflow-y: scroll;
+    height: 20rem;
+}
+
+.upcoming-passed-text{
+    margin-bottom: 0;
+}

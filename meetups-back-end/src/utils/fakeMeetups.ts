@@ -41,28 +41,39 @@ const categories = [
   'Information sharing',
   'Magic Poopers meeting',
 ];
+const names = [
+  'Mark',
+  'Kristofer',
+  'James',
+  'Robert',
+  'Michael',
+  'William',
+  'David',
+  'Richard',
+  'Charles',
+  'Pablo',
+];
 
 export const createRandomMeetups = (amount: number = 6) => {
   const meetups = [];
 
   for (let i = 0; i < amount; i++) {
-    const randomIndex = Math.floor(Math.random() * titles.length);
-    const randomAttendants = Math.floor(Math.random() * 10);
+    const randomNumber = Math.floor(Math.random() * 10);
     const meetupId = generateMeetUpId();
-    const randomExtraDays = Math.floor(Math.random() * 7);
     const startTime = createStartTime(
-      i % 2 === 0 ? randomExtraDays : -Math.abs(randomExtraDays)
+      i % 2 === 0 ? randomNumber : -Math.abs(randomNumber)
     );
     const meetup: IMeetupData = {
       PK: 'MEETUP#' + meetupId,
       SK: meetupId,
-      Title: titles[randomIndex],
+      Title: titles[randomNumber],
       Description: description,
       StartTime: startTime,
-      MaxAttendants: randomAttendants,
+      MaxAttendants: randomNumber,
       CurrentAttendants: 0,
-      Category: categories[randomIndex],
-      Location: location[randomIndex],
+      Category: categories[randomNumber],
+      Location: location[randomNumber],
+      Host: names[randomNumber],
     };
 
     meetups.push(meetup);

@@ -5,8 +5,7 @@ export async function apiGetUpcomingMeetUps(token: string) {
         const response = await fetch(BASE_URL + "/meetups", {
             method: "GET",
             headers: {
-                'authorization': `Bearer ${token}`,
-                'Content-Type': 'application/json'
+                'authorization': `Bearer ${token}`
             }
         })
         const data = await response.json()

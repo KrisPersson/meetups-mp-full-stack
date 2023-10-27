@@ -1,5 +1,13 @@
 export default {
   type: 'object',
-  properties: {},
-  required: [],
+  properties: {
+    reviewing: {
+      type: 'string',
+    },
+    rating: {
+      type: 'number',
+    },
+    meetupId: { type: 'string' },
+  },
+  required: ['reviewing', 'rating', 'SK'],
 } as const;
