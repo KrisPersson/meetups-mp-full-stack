@@ -1,4 +1,9 @@
-export interface Meetup {
+export interface Keys {
+  PK: string;
+  SK: string;
+}
+
+export interface IMeetupDetail extends Keys {
   Title: string;
   Description: string;
   StartTime: string;
@@ -9,7 +14,7 @@ export interface Meetup {
   Host: string;
 }
 
-export interface IMeetupData extends Meetup {
-  PK: string;
-  SK: string;
+export interface IAttendant extends Keys {
+  Reviewing: string;
+  Rating: number;
 }
