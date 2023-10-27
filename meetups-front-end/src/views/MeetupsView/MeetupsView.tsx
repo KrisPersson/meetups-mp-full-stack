@@ -14,12 +14,11 @@ export default function MeetupsView() {
 
   useEffect(() => {
     fetchMeetups();
-  });
+  }, []);
 
   async function fetchMeetups() {
     const dataFromDb = await apiGetUpcomingMeetUps(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Imphbm5lIiwiaWF0IjoxNjk4MzIwNjk3LCJleHAiOjE2OTg0MDcwOTd9.WmapCLhVEiZRflztpZL0NhXIEXhb4o93YlxnbqeLY6A" ||
-      ""
+      JSON.parse(localStorage.getItem("userToken") || "")
     );
     setMeetupItems([...dataFromDb.meetups]);
   }
@@ -27,18 +26,18 @@ export default function MeetupsView() {
   const renderedMeetupItems =
     meetupItems.length > 0
       ? meetupItems.map((meetup) => (
-        <section
-          key={meetup.PK}
-          className="meetups"
-          onClick={() => seeMeetup(meetup)()}
-        >
-          <h2 className="meetups__meetupsTitle">{meetup.Title}</h2>
-          <p>
-            {meetup.StartTime} | {meetup.Location} |{" "}
-            {truncate(meetup.Description, 40)} | {meetup.host}
-          </p>
-        </section>
-      ))
+          <section
+            key={meetup.PK}
+            className="meetups"
+            onClick={() => seeMeetup(meetup)()}
+          >
+            <h2 className="meetups__meetupsTitle">{meetup.Title}</h2>
+            <p>
+              {meetup.StartTime} | {meetup.Location} |{" "}
+              {truncate(meetup.Description, 40)} | {meetup.Host}
+            </p>
+          </section>
+        ))
       : [];
 
   function seeMeetup(meetup: MeetupFromDb) {

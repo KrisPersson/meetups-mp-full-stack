@@ -4,16 +4,24 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import Input from "../../components/Input/Input";
 import { apiSignup, apiLogin } from "../../api/user";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginSignUpView() {
   const [loginView, setLoginView] = useState(true);
   const [usernameInput, setUsernameInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const navigate = useNavigate();
 
-  function clickLoginSignUp() {
-    loginView
-      ? apiLogin(usernameInput, passwordInput)
-      : apiSignup(usernameInput, passwordInput);
+  async function clickLoginSignUp() {
+    let result;
+
+    if (loginView) {
+      result = await apiLogin(usernameInput, passwordInput);
+      result.success && navigate("/");
+    } else {
+      result = await apiSignup(usernameInput, passwordInput);
+      result.success && setLoginView(true);
+    }
   }
 
   function switchLoginSignUp() {
