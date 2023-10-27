@@ -1,4 +1,4 @@
-import { IMeetupData } from '@/types/meetup';
+import { IMeetupDetail } from '@/types/meetup';
 import { generateMeetUpId } from './functions';
 
 const titles = [
@@ -63,7 +63,7 @@ export const createRandomMeetups = (amount: number = 6) => {
     const startTime = createStartTime(
       i % 2 === 0 ? randomNumber : -Math.abs(randomNumber)
     );
-    const meetup: IMeetupData = {
+    const meetup: IMeetupDetail = {
       PK: 'MEETUP#' + meetupId,
       SK: meetupId,
       Title: titles[randomNumber],

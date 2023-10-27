@@ -82,6 +82,47 @@ const MeetupModel = {
   meetUpFull: (CurrentAttendants: number, MaxAttendants: number) => {
     return CurrentAttendants === MaxAttendants;
   },
+
+  getHistory: async (username: string = '') => {
+    const data = await db
+      .scan({
+        TableName: process.env.TABLE,
+        FilterExpression: 'begins_with(PK, :PK) AND contains(SK, :SK)',
+        ExpressionAttributeValues: {
+          ':PK': `MEETUP#`,
+          ':SK': username,
+        },
+      })
+      .promise();
+
+    return data.Items;
+  },
+  getMeetupsUserAttending: async (PK: string = '') => {
+    const data = await db
+      .scan({
+        TableName: process.env.TABLE,
+        FilterExpression: 'PK = :PK ',
+        ExpressionAttributeValues: {
+          ':PK': PK,
+        },
+      })
+      .promise();
+    return data.Items;
+  },
+
+  aggregateReviews: (meetups: any[]) => {
+    const attendants = meetups.filter((item) => {
+      return item.SK.includes('USER#');
+    });
+    const meetup = meetups.find((item) => {
+      return item.PK.includes('MEETUP#');
+    });
+
+    return {
+      ...meetup,
+      reviews: attendants,
+    };
+  },
 };
 
 export default MeetupModel;

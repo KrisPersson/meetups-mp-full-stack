@@ -15,10 +15,10 @@ const attendMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   if (!meetup) {
     return response.error(400, 'Meetup does not exist');
   }
-  const hasEnded = MeetupModel.hasEnded(meetup.StartTime);
-  if (hasEnded) {
-    return response.error(400, 'Meetup has ended. Cannot do this action');
-  }
+  // const hasEnded = MeetupModel.hasEnded(meetup.StartTime);
+  // if (hasEnded) {
+  //   return response.error(400, 'Meetup has ended. Cannot do this action');
+  // }
 
   const isFull = MeetupModel.meetUpFull(
     meetup.CurrentAttendants,

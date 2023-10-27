@@ -5,7 +5,7 @@ import response, {
 import schema from './schema';
 import checkToken from '@/middleware/authentication';
 import db from '@/libs/db';
-import { IMeetupData } from '@/types/meetup';
+import { IMeetupDetail } from '@/types/meetup';
 import MeetupModel from 'src/model/meetup';
 
 const getUpcomingMeetUps: ValidatedEventAPIGatewayProxyEvent<
@@ -23,7 +23,7 @@ const getUpcomingMeetUps: ValidatedEventAPIGatewayProxyEvent<
   if (!Items || Items.length === 0)
     return response.success({ message: 'No upcoming meetups' });
 
-  const upcomingMeetups = Items.filter((item: IMeetupData) => {
+  const upcomingMeetups = Items.filter((item: IMeetupDetail) => {
     return (
       !MeetupModel.hasEnded(item.StartTime) && !item.SK.startsWith('USER#')
     );
