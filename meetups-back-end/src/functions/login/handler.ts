@@ -26,6 +26,7 @@ const login: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     return response.success({
       message: 'Login in successfully!',
       token,
+      username: user.SK,
     });
   } catch (error) {
     return response.error(error.statusCode, error.message);
