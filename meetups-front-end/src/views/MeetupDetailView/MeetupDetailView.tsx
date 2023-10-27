@@ -4,6 +4,7 @@ import Header from '../../components/Header/Header';
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MeetupFromDb } from '../../types/index';
+import Reviews from '../../components/Reviews/Reviews';
 
 export default function MeetupDetailView() {
   const location = useLocation();
@@ -29,7 +30,7 @@ export default function MeetupDetailView() {
     switchRegisterBtn();
     console.log('Test: Du är nu avanmäld!');
   }
-  function handleClick() {}
+  function handleClick() { }
 
   const title = meetup?.Title;
   const date = meetup?.StartTime;
@@ -38,39 +39,39 @@ export default function MeetupDetailView() {
   const host = meetup?.Host;
   const numberOfAttendees = meetup?.CurrentAttendants;
   const maxNumberOfAttendees = meetup?.MaxAttendants;
-  const reviews = [
-    {
-      name: 'Kalle',
-      rating: 5,
-      review: 'Bästa hundmötet ever!',
-    },
-    {
-      name: 'Lisa',
-      rating: 4,
-      review: 'Bra hundmöte!',
-    },
-    {
-      name: 'Nisse',
-      rating: 3,
-      review: 'Okej hundmöte!',
-    },
-    {
-      name: 'Pelle',
-      rating: 2,
-      review: 'Sämsta hundmötet ever!',
-    },
-    {
-      name: 'Sara',
-      rating: 1,
-      review: 'Det är sista gången jag tar min katt Göran på detta event!!',
-    },
-  ];
-  const reviewItems = reviews.map((review, index) => (
-    <li key={+index}>
-      {' '}
-      Namn: {review.name} Betyg: {review.rating} Kommentar: {review.review}
-    </li>
-  ));
+  // const reviews = [
+  //   {
+  //     name: 'Kalle',
+  //     rating: 5,
+  //     review: 'Bästa hundmötet ever!',
+  //   },
+  //   {
+  //     name: 'Lisa',
+  //     rating: 4,
+  //     review: 'Bra hundmöte!',
+  //   },
+  //   {
+  //     name: 'Nisse',
+  //     rating: 3,
+  //     review: 'Okej hundmöte!',
+  //   },
+  //   {
+  //     name: 'Pelle',
+  //     rating: 2,
+  //     review: 'Sämsta hundmötet ever!',
+  //   },
+  //   {
+  //     name: 'Sara',
+  //     rating: 1,
+  //     review: 'Det är sista gången jag tar min katt Göran på detta event!!',
+  //   },
+  // ];
+  // const reviewItems = reviews.map((review, index) => (
+  //   <li key={+index}>
+  //     {' '}
+  //     Namn: {review.name} Betyg: {review.rating} Kommentar: {review.review}
+  //   </li>
+  // ));
 
   return (
     <div className='view meetupDetail-view'>
@@ -84,9 +85,10 @@ export default function MeetupDetailView() {
         <h2>
           Anmälda: {numberOfAttendees}/{maxNumberOfAttendees}
         </h2>
-        <h2>
+        {/* <h2>
           Recensioner: <ul>{reviewItems}</ul>{' '}
-        </h2>
+        </h2> */}
+        <Reviews />
       </section>
       {registered ? (
         <Footer buttonText='Avregistrera mig!' onClick={clickToUnregister} />
