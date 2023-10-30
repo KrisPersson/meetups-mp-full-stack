@@ -21,4 +21,4 @@ export interface MeetupFromDb {
     MaxAttendants: number;
     CurrentAttendants: number;
     Category?: string;
-  }
+}
