@@ -58,28 +58,32 @@ export const createRandomMeetups = (amount: number = 6) => {
   const meetups = [];
 
   for (let i = 0; i < amount; i++) {
-    const randomNumber = Math.floor(Math.random() * 10);
+    const randomExtraDays = generateRandomNumber();
     const meetupId = generateMeetUpId();
     const startTime = createStartTime(
-      i % 2 === 0 ? randomNumber : -Math.abs(randomNumber)
+      i % 2 === 0 ? randomExtraDays : -Math.abs(randomExtraDays)
     );
     const meetup: IMeetupDetail = {
       PK: 'MEETUP#' + meetupId,
       SK: meetupId,
-      Title: titles[randomNumber],
+      Title: titles[generateRandomNumber()],
       Description: description,
       StartTime: startTime,
-      MaxAttendants: randomNumber,
+      MaxAttendants: generateRandomNumber(),
       CurrentAttendants: 0,
-      Category: categories[randomNumber],
-      Location: location[randomNumber],
-      Host: names[randomNumber],
+      Category: categories[generateRandomNumber()],
+      Location: location[generateRandomNumber()],
+      Host: names[generateRandomNumber()],
     };
 
     meetups.push(meetup);
   }
   return meetups;
 };
+
+function generateRandomNumber() {
+  return Math.floor(Math.random() * 10);
+}
 
 function createStartTime(randomExtraDays: number) {
   let date = new Date();
