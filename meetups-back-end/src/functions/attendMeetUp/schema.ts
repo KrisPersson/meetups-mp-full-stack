@@ -1,5 +1,7 @@
 export default {
   type: 'object',
-  properties: {},
-  required: [],
+  properties: {
+    meetupId: { type: 'string' },
+  },
+  required: ['meetupId'],
 } as const;

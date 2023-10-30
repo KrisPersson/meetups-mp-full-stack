@@ -10,6 +10,7 @@ import { APP_URL } from '../../utils';
 export default function MeetupDetailView() {
   const location = useLocation();
   const navigate = useNavigate();
+  console.log(location.state);
 
   useEffect(() => {
     if (!location.state) {

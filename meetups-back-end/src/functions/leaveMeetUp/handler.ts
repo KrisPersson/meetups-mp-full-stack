@@ -5,11 +5,13 @@ import { middyfy } from '@/libs/lambda';
 import schema from './schema';
 import checkToken from '@/middleware/authentication';
 import MeetupModel from 'src/model/meetup';
+import validation from '@/middleware/validation';
+import { meetupIdSchema } from '@/utils/validationSchema';
 
 const leaveMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
-  const { meetupId } = event.pathParameters;
+  const { meetupId } = event.body;
   const { username } = event;
   const meetup = await MeetupModel.findMeetup(meetupId);
   if (!meetup) {
@@ -34,4 +36,6 @@ const leaveMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   }
 };
 
-export const main = middyfy(leaveMeetUp).use(checkToken());
+export const main = middyfy(leaveMeetUp)
+  .use(checkToken())
+  .use(validation(meetupIdSchema));

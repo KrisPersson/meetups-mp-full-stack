@@ -6,7 +6,7 @@ export default {
     {
       httpApi: {
         method: 'PUT',
-        path: '/api/meetups/{meetupId}/attend',
+        path: '/api/meetups/attend',
       },
     },
   ],
