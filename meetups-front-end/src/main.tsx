@@ -11,7 +11,7 @@ import PrivateRoute from './router/privateRoute';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: '/meetups-mp-full-stack/',
     element: <PrivateRoute />,
     children: [
       {
@@ -29,7 +29,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/login',
+    path: '/meetups-mp-full-stack/login',
     element: <LoginSignupView />,
   },
 ]);
