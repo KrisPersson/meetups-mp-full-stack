@@ -5,8 +5,7 @@ import response, {
 import schema from './schema';
 import checkToken from '@/middleware/authentication';
 import db from '@/libs/db';
-import { IMeetupData } from '@/types/meetup';
-import MeetupModel from 'src/model/meetup';
+import { formatDate } from '@/utils/fakeMeetups';
 
 const getUpcomingMeetUps: ValidatedEventAPIGatewayProxyEvent<
   typeof schema
@@ -14,23 +13,18 @@ const getUpcomingMeetUps: ValidatedEventAPIGatewayProxyEvent<
   const { Items } = await db
     .scan({
       TableName: process.env.TABLE,
-      FilterExpression: 'begins_with(PK, :key)',
+      FilterExpression: 'begins_with(PK, :key) AND StartTime > :currentTime',
       ExpressionAttributeValues: {
         ':key': 'MEETUP#',
+        ':currentTime': formatDate(Date.now()),
       },
     })
     .promise();
   if (!Items || Items.length === 0)
     return response.success({ message: 'No upcoming meetups' });
 
-  const upcomingMeetups = Items.filter((item: IMeetupData) => {
-    return (
-      !MeetupModel.hasEnded(item.StartTime) && !item.SK.startsWith('USER#')
-    );
-  });
-
   return response.success({
-    meetups: upcomingMeetups,
+    meetups: Items,
   });
 };
 

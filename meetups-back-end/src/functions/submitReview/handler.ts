@@ -19,15 +19,9 @@ const submitReview: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   if (!meetup) {
     return response.error(400, 'Meetup does not exist');
   }
-  const { username } = event;
   const hasEnded = MeetupModel.hasEnded(meetup.StartTime);
   if (!hasEnded) {
     return response.error(400, 'Meetup has not ended. Cannot do this action');
-  }
-
-  let point: number = 1;
-  if (rating) {
-    point = rating;
   }
 
   try {
@@ -36,7 +30,7 @@ const submitReview: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
         TableName: process.env.TABLE,
         Key: {
           PK: `MEETUP#${meetupId}`,
-          SK: `USER#${username}`,
+          SK: `USER#${event.username}`,
         },
         UpdateExpression: 'set #reviewing = :reviewing, #rating = :rating',
         ExpressionAttributeNames: {
@@ -45,7 +39,7 @@ const submitReview: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
         },
         ExpressionAttributeValues: {
           ':reviewing': reviewing,
-          ':rating': point,
+          ':rating': rating,
         },
         ConditionExpression: 'attribute_exists(SK)',
       })

@@ -8,6 +8,7 @@ import {
   profile,
   signup,
   submitReview,
+  searching,
 } from '@/functions/index';
 import Tables from 'src/yaml/dynamoDB';
 const serverlessConfiguration: AWS = {
@@ -50,6 +51,7 @@ const serverlessConfiguration: AWS = {
     profile,
     signup,
     submitReview,
+    searching,
   },
   package: { individually: true },
   custom: {

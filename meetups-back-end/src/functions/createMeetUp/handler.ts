@@ -5,12 +5,12 @@ import response, {
 import { createRandomMeetups } from '@/utils/fakeMeetups';
 import db from '@/libs/db';
 import schema from './schema';
-import { IMeetupData } from '@/types/meetup';
+import { IMeetupDetail } from '@/types/meetup';
 
 const updateMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
-  const meetups: IMeetupData[] = createRandomMeetups();
+  const meetups: IMeetupDetail[] = createRandomMeetups();
 
   const request = meetups.map((meetup) => {
     return {

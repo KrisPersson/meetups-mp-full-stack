@@ -10,7 +10,6 @@ const attendMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
   const { meetupId } = event.pathParameters;
-  const { username } = event;
   const meetup = await MeetupModel.findMeetup(meetupId);
   if (!meetup) {
     return response.error(400, 'Meetup does not exist');
@@ -20,7 +19,7 @@ const attendMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     return response.error(400, 'Meetup has ended. Cannot do this action');
   }
 
-  const isFull = MeetupModel.meetUpFull(
+  const isFull = MeetupModel.hasPlace(
     meetup.CurrentAttendants,
     meetup.MaxAttendants
   );
@@ -28,7 +27,7 @@ const attendMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     return response.error(400, 'Meetup is full');
   }
   try {
-    await MeetupModel.storeAttendantForMeetup(meetupId, username);
+    await MeetupModel.storeAttendantForMeetup(meetupId, event.username);
     await MeetupModel.updateAmountOfAttendant(meetupId, 1);
     return response.success({
       message: 'Attend meetup successfully!',
