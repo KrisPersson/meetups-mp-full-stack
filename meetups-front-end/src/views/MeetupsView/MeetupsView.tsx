@@ -26,7 +26,7 @@ export default function MeetupsView() {
 
   function seeMeetup(meetup: MeetupFromDb) {
     return function () {
-      navigate("'/meetups-mp-full-stack/detail/", {
+      navigate('/meetups-mp-full-stack/detail/', {
         state: { meetup: meetup },
       });
     };
