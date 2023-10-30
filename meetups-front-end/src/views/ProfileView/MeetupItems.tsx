@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { MeetupFromDb } from '../../types';
+import { APP_URL } from '../../utils';
 
 function MeetupItems(props: { meetupArr: MeetupFromDb[] }) {
   const { meetupArr } = props;
@@ -7,7 +8,7 @@ function MeetupItems(props: { meetupArr: MeetupFromDb[] }) {
 
   function seeMeetup(meetup: MeetupFromDb) {
     return function () {
-      navigate('/meetups-mp-full-stack/detail/', { state: { meetup: meetup } });
+      navigate(APP_URL + 'detail', { state: { meetup: meetup } });
     };
   }
 
