@@ -1,15 +1,15 @@
-import { useState } from "react";
-import "./LoginSignUpView.scss";
-import Footer from "../../components/Footer/Footer";
-import Header from "../../components/Header/Header";
-import Input from "../../components/Input/Input";
-import { apiSignup, apiLogin } from "../../api/user";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import './LoginSignUpView.scss';
+import Footer from '../../components/Footer/Footer';
+import Header from '../../components/Header/Header';
+import Input from '../../components/Input/Input';
+import { apiSignup, apiLogin } from '../../api/user';
+import { useNavigate } from 'react-router-dom';
 
 export default function LoginSignUpView() {
   const [loginView, setLoginView] = useState(true);
-  const [usernameInput, setUsernameInput] = useState("");
-  const [passwordInput, setPasswordInput] = useState("");
+  const [usernameInput, setUsernameInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
   const navigate = useNavigate();
 
   async function clickLoginSignUp() {
@@ -17,7 +17,7 @@ export default function LoginSignUpView() {
 
     if (loginView) {
       result = await apiLogin(usernameInput, passwordInput);
-      result.success && navigate("/");
+      result.success && navigate('/meetups-mp-full-stack/');
     } else {
       result = await apiSignup(usernameInput, passwordInput);
       result.success && setLoginView(true);
@@ -29,22 +29,22 @@ export default function LoginSignUpView() {
   }
 
   return (
-    <div className="view login-view">
+    <div className='view login-view'>
       <Header loginSignUpHeader={true} />
-      <section className="login-forms">
-        <div className="login-wrapper-one">
+      <section className='login-forms'>
+        <div className='login-wrapper-one'>
           <Input
-            label="USERNAME"
-            htmlFor="login-input"
+            label='USERNAME'
+            htmlFor='login-input'
             inputValue={usernameInput}
             setInputValue={setUsernameInput}
           />
         </div>
-        <div className="login-wrapper-two">
+        <div className='login-wrapper-two'>
           <Input
-            label="PASSWORD"
-            htmlFor="pwd-input"
-            fieldType="pwd"
+            label='PASSWORD'
+            htmlFor='pwd-input'
+            fieldType='pwd'
             inputValue={passwordInput}
             setInputValue={setPasswordInput}
           />
@@ -52,7 +52,7 @@ export default function LoginSignUpView() {
       </section>
       {loginView ? (
         <Footer
-          buttonText="LOGIN"
+          buttonText='LOGIN'
           loginView={true}
           onClick={clickLoginSignUp}
           switchLoginSignUp={switchLoginSignUp}
@@ -60,7 +60,7 @@ export default function LoginSignUpView() {
         />
       ) : (
         <Footer
-          buttonText="SIGN UP"
+          buttonText='SIGN UP'
           loginView={false}
           onClick={clickLoginSignUp}
           switchLoginSignUp={switchLoginSignUp}

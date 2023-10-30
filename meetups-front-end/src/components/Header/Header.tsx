@@ -17,14 +17,20 @@ export default function Header(props: Props) {
     <header className='header'>
       {props.showHomeBtn ? (
         <div className='home'>
-          <h1 className='nav-home' onClick={() => navigate('/')}>
+          <h1
+            className='nav-home'
+            onClick={() => navigate('/meetups-mp-full-stack/')}
+          >
             HOME
           </h1>
         </div>
       ) : null}
       {props.showMyPageBtn ? (
         <div className='myPage'>
-          <h1 className='nav-myPage' onClick={() => navigate('/profile')}>
+          <h1
+            className='nav-myPage'
+            onClick={() => navigate('/meetups-mp-full-stack/profile')}
+          >
             MIN SIDA
           </h1>
         </div>

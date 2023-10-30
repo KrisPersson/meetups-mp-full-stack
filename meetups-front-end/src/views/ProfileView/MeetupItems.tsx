@@ -7,7 +7,7 @@ function MeetupItems(props: { meetupArr: MeetupFromDb[] }) {
 
   function seeMeetup(meetup: MeetupFromDb) {
     return function () {
-      navigate('/detail/', { state: { meetup: meetup } });
+      navigate('/meetups-mp-full-stack/detail/', { state: { meetup: meetup } });
     };
   }
 
