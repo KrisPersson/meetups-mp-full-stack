@@ -43,6 +43,8 @@ export async function apiGetUserProfile(token: string) {
     const data = await response.json();
     return data;
   } catch (error) {
+    console.log(error);
+
     return error;
   }
 }

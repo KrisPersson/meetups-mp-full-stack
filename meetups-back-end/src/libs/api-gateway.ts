@@ -7,6 +7,7 @@ import type { FromSchema } from 'json-schema-to-ts';
 export interface CustomAPIGatewayProxyEvent extends APIGatewayProxyEvent {
   username?: string;
 }
+
 type ValidatedAPIGatewayProxyEvent<S> = Omit<
   CustomAPIGatewayProxyEvent,
   'body'
