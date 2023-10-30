@@ -1,50 +1,54 @@
-import "./ProfileView.scss";
-import Header from "../../components/Header/Header";
-import meetupArr from "../../components/Meetups/Meetups";
-import { useNavigate } from "react-router-dom";
+import './ProfileView.scss';
+import Header from '../../components/Header/Header';
+import { MeetupFromDb } from '../../types';
+import React from 'react';
+import { apiGetUserProfile } from '../../api';
+import MeetupItems from './MeetupItems';
 
-
+type ProfileType = {
+  upcoming: MeetupFromDb[];
+  past: MeetupFromDb[];
+};
 export default function ProfileView() {
-  const navigate = useNavigate();
-  const userName = "Kalle";
+  const [meetups, setMeetups] = React.useState<ProfileType | null>(null);
 
-  function handleClick() { console.log("test"); }
-  const meetupItems = meetupArr.map((meetup) =>
-    <section key={meetup.meetupId} className="meetups" onClick={() => seeMeetup(meetup)()} >
-      <h2 className="meetups__meetupsTitle">{meetup.title}</h2>
-      <p>{meetup.date} | {meetup.venue} | {meetup.shortInfo} | {meetup.host}</p>
-    </section>
+  React.useEffect(() => {
+    const token = localStorage.getItem('userToken') || '';
+
+    apiGetUserProfile(token)
+      .then((res) => {
+        if (res.success) {
+          setMeetups(res.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  return (
+    <div className='view profile-view'>
+      <Header showHomeBtn={true} showMyPageBtn={false} />
+      <section className='profile-container'>
+        <h1>Meetups</h1>
+        <h2 className='upcoming-passed-text'>Kommande</h2>
+        {meetups && meetups.upcoming.length !== 0 ? (
+          <ul className='upcoming-events-container'>
+            <MeetupItems meetupArr={meetups.upcoming} />
+          </ul>
+        ) : (
+          <p>Not found</p>
+        )}
+        <h2 className='upcoming-passed-text'>Tidigare</h2>
+
+        {meetups && meetups.past.length !== 0 ? (
+          <ul className='passed-events-container'>
+            <MeetupItems meetupArr={meetups.past} />
+          </ul>
+        ) : (
+          <p>Not found</p>
+        )}
+      </section>
+    </div>
   );
-  type Meetup = {
-    meetupId: number;
-    title: string;
-    date: string;
-    venue: string;
-    shortInfo: string;
-    host: string;
-  };
-
-  function seeMeetup(meetup: Meetup) {
-    return function () {
-      navigate("/detail/", { state: { meetup: meetup } })
-    }
-  }
-
-
-
-  return <div className="view profile-view">
-    <Header showHomeBtn={true} showMyPageBtn={false} onClick={handleClick} />
-    <section className="profile-container">
-      <h1>{userName}s meetups</h1>
-      <h2 className="upcoming-passed-text">Kommande</h2>
-      <section className="upcoming-events-container">
-        {meetupItems}
-      </section>
-      <h2 className="upcoming-passed-text">Tidigare</h2>
-      <section className="passed-events-container">
-        {meetupItems}
-      </section>
-    </section>
-
-  </div>;
 }
