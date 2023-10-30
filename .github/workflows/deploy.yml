@@ -6,7 +6,7 @@ on:
       - dev
 
 env:
-  VITE_APP_URL: '/meetups-mp-full-stack'
+  VITE_APP_URL: '/meetups-mp-full-stack/'
 permissions:
   contents: read
   packages: write
