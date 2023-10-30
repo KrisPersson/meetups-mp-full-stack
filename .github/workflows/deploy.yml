@@ -5,6 +5,8 @@ on:
     branches:
       - dev
 
+env:
+  VITE_APP_URL: '/meetups-mp-full-stack/'
 permissions:
   contents: read
   packages: write
@@ -28,7 +30,7 @@ jobs:
       - name: upload dist folder
         uses: actions/upload-pages-artifact@v1
         with:
-          path: "./meetups-front-end/dist"
+          path: './meetups-front-end/dist'
       - name: Deploy to github pages
         uses: actions/deploy-pages@v1
 

@@ -1,11 +1,13 @@
 import "./MeetupsView.scss";
 import Header from "../../components/Header/Header";
 import { apiGetUpcomingMeetUps } from "../../api/meetups";
+// import meetupArr from "../../components/Meetups/Meetups";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { MeetupFromDb } from "../../types/index";
 import { MeetupListItem } from "../../components/MeetupListItem/MeetupListItem";
-import { createFilterSelectOptions } from "../../utils/index";
+import { APP_URL } from "../../utils/index";
+import { createFilterSelectOptions } from "../../utils/filterSelectOptions";
 
 export default function MeetupsView() {
   const navigate = useNavigate();
@@ -30,8 +32,14 @@ export default function MeetupsView() {
 
   function seeMeetup(meetup: MeetupFromDb) {
     return function () {
-      navigate("/detail/", { state: { meetup: meetup } });
+      navigate(APP_URL + "detail", {
+        state: { meetup: meetup },
+      });
     };
+  }
+
+  function handleClick() {
+    console.log("test");
   }
 
   function searchMeetups(value: string) {

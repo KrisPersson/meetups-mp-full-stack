@@ -8,10 +8,11 @@ import LoginSignupView from './views/LoginSignupView/LoginSignUpView';
 import MeetupsView from './views/MeetupsView/MeetupsView';
 import MeetupDetailView from './views/MeetupDetailView/MeetupDetailView';
 import PrivateRoute from './router/privateRoute';
+import { APP_URL } from './utils';
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: APP_URL,
     element: <PrivateRoute />,
     children: [
       {
@@ -29,7 +30,7 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/login',
+    path: APP_URL + '/login',
     element: <LoginSignupView />,
   },
 ]);
