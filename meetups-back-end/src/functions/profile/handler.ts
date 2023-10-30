@@ -30,7 +30,6 @@ const profile: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
       data.upcoming.push(sortedMeetup);
     }
     return response.success({
-      message: 'Success',
       data,
     });
   } catch (error) {
