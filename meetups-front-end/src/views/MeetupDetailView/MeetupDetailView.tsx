@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { MeetupFromDb } from '../../types/index';
 import Reviews from '../../components/Reviews/Reviews';
+import { APP_URL } from '../../utils';
 
 export default function MeetupDetailView() {
   const location = useLocation();
@@ -12,7 +13,7 @@ export default function MeetupDetailView() {
 
   useEffect(() => {
     if (!location.state) {
-      navigate('/');
+      navigate(APP_URL);
     }
   }, [location]);
   const meetup: MeetupFromDb = location?.state?.meetup;
@@ -30,7 +31,7 @@ export default function MeetupDetailView() {
     switchRegisterBtn();
     console.log('Test: Du är nu avanmäld!');
   }
-  function handleClick() { }
+  function handleClick() {}
 
   const title = meetup?.Title;
   const date = meetup?.StartTime;

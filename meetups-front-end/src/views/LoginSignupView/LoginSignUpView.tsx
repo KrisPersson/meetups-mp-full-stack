@@ -5,6 +5,7 @@ import Header from '../../components/Header/Header';
 import Input from '../../components/Input/Input';
 import { apiSignup, apiLogin } from '../../api/user';
 import { useNavigate } from 'react-router-dom';
+import { APP_URL } from '../../utils';
 
 export default function LoginSignUpView() {
   const [loginView, setLoginView] = useState(true);
@@ -17,7 +18,7 @@ export default function LoginSignUpView() {
 
     if (loginView) {
       result = await apiLogin(usernameInput, passwordInput);
-      result.success && navigate('/meetups-mp-full-stack/');
+      result.success && navigate(APP_URL);
     } else {
       result = await apiSignup(usernameInput, passwordInput);
       result.success && setLoginView(true);

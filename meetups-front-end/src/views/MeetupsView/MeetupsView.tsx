@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { MeetupFromDb } from '../../types/index';
 import { MeetupListItem } from '../../components/MeetupListItem/MeetupListItem';
+import { APP_URL } from '../../utils';
 
 export default function MeetupsView() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ export default function MeetupsView() {
 
   function seeMeetup(meetup: MeetupFromDb) {
     return function () {
-      navigate('/meetups-mp-full-stack/detail/', {
+      navigate(APP_URL + 'detail', {
         state: { meetup: meetup },
       });
     };

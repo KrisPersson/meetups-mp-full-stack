@@ -1,3 +1,4 @@
+import { APP_URL } from '../../utils';
 import './Header.scss';
 //import Button from "../Button/Button";
 import { useNavigate } from 'react-router-dom';
@@ -12,15 +13,13 @@ type Props = {
 
 export default function Header(props: Props) {
   const navigate = useNavigate();
+  console.log('Header', APP_URL + 'detail');
 
   return (
     <header className='header'>
       {props.showHomeBtn ? (
         <div className='home'>
-          <h1
-            className='nav-home'
-            onClick={() => navigate('/meetups-mp-full-stack/')}
-          >
+          <h1 className='nav-home' onClick={() => navigate(`${APP_URL}`)}>
             HOME
           </h1>
         </div>
@@ -29,7 +28,7 @@ export default function Header(props: Props) {
         <div className='myPage'>
           <h1
             className='nav-myPage'
-            onClick={() => navigate('/meetups-mp-full-stack/profile')}
+            onClick={() => navigate(APP_URL + 'profile')}
           >
             MIN SIDA
           </h1>
