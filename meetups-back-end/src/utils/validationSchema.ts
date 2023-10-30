@@ -12,18 +12,8 @@ export const loginSchema = yup.object().shape({
     .nonNullable()
     .required('Password is required'),
 });
-export const reviewSchema = yup.object().shape({
-  reviewing: yup
-    .string()
-    .ensure()
-    .trim()
-    .nonNullable()
-    .required('Username is required'),
-  rating: yup
-    .number()
-    .min(1, 'Rating must be greater than or equal to 1')
-    .max(5, 'Rating must be less than or equal to 5')
-    .required('Rating is required'),
+
+export const meetupIdSchema = yup.object().shape({
   meetupId: yup
     .string()
     .trim()
@@ -31,3 +21,19 @@ export const reviewSchema = yup.object().shape({
     .nonNullable()
     .required('Meetup Id is required'),
 });
+export const reviewSchema = yup
+  .object()
+  .shape({
+    reviewing: yup
+      .string()
+      .ensure()
+      .trim()
+      .nonNullable()
+      .required('Username is required'),
+    rating: yup
+      .number()
+      .min(1, 'Rating must be greater than or equal to 1')
+      .max(5, 'Rating must be less than or equal to 5')
+      .required('Rating is required'),
+  })
+  .concat(meetupIdSchema);

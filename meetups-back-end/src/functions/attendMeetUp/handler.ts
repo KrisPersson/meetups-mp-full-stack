@@ -5,11 +5,13 @@ import response, {
 import schema from './schema';
 import checkToken from '@/middleware/authentication';
 import MeetupModel from 'src/model/meetup';
+import validation from '@/middleware/validation';
+import { meetupIdSchema } from '@/utils/validationSchema';
 
 const attendMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   event
 ) => {
-  const { meetupId } = event.pathParameters;
+  const { meetupId } = event.body;
   const meetup = await MeetupModel.findMeetup(meetupId);
   if (!meetup) {
     return response.error(400, 'Meetup does not exist');
@@ -41,4 +43,6 @@ const attendMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   }
 };
 
-export const main = middyfy(attendMeetUp).use(checkToken());
+export const main = middyfy(attendMeetUp)
+  .use(checkToken())
+  .use(validation(meetupIdSchema));
