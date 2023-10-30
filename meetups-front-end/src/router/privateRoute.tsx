@@ -3,5 +3,9 @@ import { Navigate } from 'react-router-dom';
 export default function PrivateRoute() {
   const token = localStorage.getItem('userToken') || '';
 
-  return token ? <PrivateLayout /> : <Navigate to='/login' />;
+  return token ? (
+    <PrivateLayout />
+  ) : (
+    <Navigate to='/meetups-mp-full-stack/login' />
+  );
 }
