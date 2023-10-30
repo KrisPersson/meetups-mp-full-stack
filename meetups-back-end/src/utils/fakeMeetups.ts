@@ -86,22 +86,14 @@ function createStartTime(randomExtraDays: number) {
 
   date.setDate(date.getDate() + randomExtraDays);
 
-  return formatDate(date);
+  return formatDate(date.getTime());
 }
 
-export function formatDate(date: Date) {
-  return date.toLocaleString(undefined, {
-    timeZone: 'Europe/Stockholm',
-    hour12: false,
-    weekday: 'short',
-    year: 'numeric',
-    month: 'short',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-  });
-}
+export function formatDate(date: number) {
+  const timezoneOffSet = new Date().getTimezoneOffset() * 60000; //offset in milliseconds
 
-export function convertDateToNumber(date: Date | string = new Date()) {
-  return new Date(date).getTime();
+  const localISOTime = new Date(date - timezoneOffSet)
+    .toISOString()
+    .slice(0, -8);
+  return localISOTime;
 }

@@ -6,3 +6,4 @@ export { default as getUpcomingMeetUps } from './getUpcomingMeetUps';
 export { default as leaveMeetUp } from './leaveMeetUp';
 export { default as profile } from './profile';
 export { default as submitReview } from './submitReview';
+export { default as searching } from './searching';

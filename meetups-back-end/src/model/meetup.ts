@@ -1,5 +1,5 @@
 import db from '@/libs/db';
-import { convertDateToNumber } from '@/utils/fakeMeetups';
+import { formatDate } from '@/utils/fakeMeetups';
 
 const MeetupModel = {
   findMeetup: async (meetupId: string) => {
@@ -74,12 +74,10 @@ const MeetupModel = {
       .promise();
   },
   hasEnded: (StartTime: string) => {
-    const currentTime = convertDateToNumber();
-    const startTime = convertDateToNumber(StartTime);
-    return currentTime > startTime;
+    return StartTime < formatDate(Date.now());
   },
 
-  meetUpFull: (CurrentAttendants: number, MaxAttendants: number) => {
+  hasPlace: (CurrentAttendants: number, MaxAttendants: number) => {
     return CurrentAttendants === MaxAttendants;
   },
 
