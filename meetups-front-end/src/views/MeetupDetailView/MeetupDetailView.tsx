@@ -1,46 +1,67 @@
-import './MeetupDetailView.scss';
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
-import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { MeetupFromDb } from '../../types/index';
-import Reviews from '../../components/Reviews/Reviews';
-import { APP_URL } from '../../utils';
+import "./MeetupDetailView.scss";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { MeetupFromDb } from "../../types/index";
+import Reviews from "../../components/Reviews/Reviews";
+import { APP_URL } from "../../utils";
+import { apiGetSpecificMeetup, apiAttendLeaveMeetup } from "../../api/meetups";
 
 export default function MeetupDetailView() {
   const location = useLocation();
   const navigate = useNavigate();
-  console.log(location.state);
+  const [registered, setRegistered] = useState(false);
+  const [meetupState, setMeetupState] = useState<MeetupFromDb | null>(null);
+  // console.log(location.state);
 
   useEffect(() => {
     if (!location.state) {
       navigate(APP_URL);
     }
   }, [location]);
-  const meetup: MeetupFromDb = location?.state?.meetup;
 
-  const [registered, setRegistered] = useState(false);
+  useEffect(() => {
+    fetchSpecificMeetup(location.state.meetupId || null);
+  }, [registered]);
 
-  function switchRegisterBtn() {
-    registered ? setRegistered(false) : setRegistered(true);
+  async function fetchSpecificMeetup(meetupId: string) {
+    const dbMeetup = await apiGetSpecificMeetup(
+      localStorage.getItem("userToken") || "",
+      meetupId
+    );
+    if (dbMeetup.success) setMeetupState({ ...dbMeetup.data });
+    if (dbMeetup?.data.Attendants?.includes(localStorage.username))
+      setRegistered(true);
   }
-  function clickToRegister() {
-    switchRegisterBtn();
-    console.log('Test: Du är nu anmäld!');
-  }
-  function clickToUnregister() {
-    switchRegisterBtn();
-    console.log('Test: Du är nu avanmäld!');
-  }
-  function handleClick() {}
 
-  const title = meetup?.Title;
-  const date = meetup?.StartTime;
-  const venue = meetup?.Location;
-  const info = meetup?.Description;
-  const host = meetup?.Host;
-  const numberOfAttendees = meetup?.CurrentAttendants;
-  const maxNumberOfAttendees = meetup?.MaxAttendants;
+  async function clickToRegOrUnreg() {
+    if (registered) {
+      await apiAttendLeaveMeetup(
+        localStorage.getItem("userToken") || "",
+        location.state.meetupId,
+        "leave"
+      );
+      console.log("Test: Du är nu avanmäld!");
+      setRegistered(false);
+    } else {
+      await apiAttendLeaveMeetup(
+        localStorage.getItem("userToken") || "",
+        location.state.meetupId,
+        "attend"
+      );
+      console.log("Test: Du är nu anmäld!");
+      setRegistered(true);
+    }
+  }
+
+  const title = meetupState?.Title;
+  const date = meetupState?.StartTime;
+  const venue = meetupState?.Location;
+  const info = meetupState?.Description;
+  const host = meetupState?.Host;
+  const numberOfAttendees = meetupState?.CurrentAttendants;
+  const maxNumberOfAttendees = meetupState?.MaxAttendants;
   // const reviews = [
   //   {
   //     name: 'Kalle',
@@ -76,9 +97,9 @@ export default function MeetupDetailView() {
   // ));
 
   return (
-    <div className='view meetupDetail-view'>
-      <Header showHomeBtn={true} showMyPageBtn={true} onClick={handleClick} />
-      <section className='detail-container'>
+    <div className="view meetupDetail-view">
+      <Header showHomeBtn={true} showMyPageBtn={true} onClick={null} />
+      <section className="detail-container">
         <h1>{title}</h1>
         <h2>Datum: {date}</h2>
         <h2>Plats: {venue}</h2>
@@ -93,9 +114,13 @@ export default function MeetupDetailView() {
         <Reviews />
       </section>
       {registered ? (
-        <Footer buttonText='Avregistrera mig!' onClick={clickToUnregister} />
+        <Footer buttonText="Avregistrera mig!" onClick={clickToRegOrUnreg} />
       ) : (
-        <Footer buttonText='Anmäl mig!' onClick={clickToRegister} />
+        <Footer
+          isFullyBooked={numberOfAttendees === maxNumberOfAttendees}
+          buttonText="Anmäl mig!"
+          onClick={clickToRegOrUnreg}
+        />
       )}
     </div>
   );

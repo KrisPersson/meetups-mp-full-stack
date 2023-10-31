@@ -17,17 +17,20 @@ const profile: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   try {
     const listOfMeetups = await MeetupModel.getHistory(username);
 
-    for (let index = 0; index < listOfMeetups.length; index++) {
-      const { PK } = listOfMeetups[index];
-      const list = await MeetupModel.getMeetupsUserAttending(PK);
+    if (listOfMeetups.length > 0) {
+      for (let index = 0; index < listOfMeetups.length; index++) {
+        const { PK } = listOfMeetups[index];
+        // includes meetup detail and all attends of that meetup
+        const list = await MeetupModel.getMeetupsUserAttending(PK);
 
-      const sortedMeetup = MeetupModel.aggregateReviews(list);
-      const hasEnded = MeetupModel.hasEnded(sortedMeetup.StartTime);
-      if (hasEnded) {
-        data.past.push(sortedMeetup);
-        continue;
+        const sortedMeetup = MeetupModel.aggregateReviews(list);
+        const hasEnded = MeetupModel.hasEnded(sortedMeetup.StartTime);
+        if (hasEnded) {
+          data.past.push(sortedMeetup);
+          continue;
+        }
+        data.upcoming.push(sortedMeetup);
       }
-      data.upcoming.push(sortedMeetup);
     }
     return response.success({
       username: username,

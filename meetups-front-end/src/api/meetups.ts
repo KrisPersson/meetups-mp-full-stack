@@ -1,4 +1,4 @@
-import { BASE_URL } from './index';
+import { BASE_URL, logout } from './index';
 
 export async function apiGetUpcomingMeetUps(token: string) {
   try {
@@ -9,6 +9,27 @@ export async function apiGetUpcomingMeetUps(token: string) {
       },
     });
     const data = await response.json();
+    if (response.status === 401) {
+      logout();
+    }
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
+export async function apiGetSpecificMeetup(token: string, meetupId: string) {
+  try {
+    const response = await fetch(BASE_URL + `/meetups/${meetupId}`, {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    if (response.status === 401) {
+      logout();
+    }
     return data;
   } catch (error) {
     return error;
@@ -33,6 +54,9 @@ export async function apiAttendLeaveMeetup(
       body: JSON.stringify(body),
     });
     const data = await response.json();
+    if (response.status === 401) {
+      logout();
+    }
     return data;
   } catch (error) {
     console.log(error);
@@ -59,7 +83,12 @@ export async function apiSubmitReview(
       },
       body: JSON.stringify(body),
     });
+
     const data = await response.json();
+    if (response.status === 401) {
+      logout();
+    }
+
     return data;
   } catch (error) {
     console.log(error);

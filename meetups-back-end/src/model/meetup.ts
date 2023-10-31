@@ -17,6 +17,19 @@ const MeetupModel = {
     return data.Item;
   },
 
+  getAllAttendantsOfMeetup: async (meetupId: string) => {
+    const { Items } = await db
+      .scan({
+        TableName: process.env.TABLE,
+        FilterExpression: 'PK = :PK AND begins_with(SK, :SK)',
+        ExpressionAttributeValues: {
+          ':PK': `MEETUP#${meetupId}`,
+          ':SK': 'USER#',
+        },
+      })
+      .promise();
+    return Items;
+  },
   getAttendant: async (meetupId: string, username: string) => {
     const { Item } = await db
       .get({
@@ -109,7 +122,7 @@ const MeetupModel = {
   },
 
   aggregateReviews: (meetups: any[]) => {
-    const attendants = meetups.filter((item) => {
+    const Attendants = meetups.filter((item) => {
       return item.SK.includes('USER#');
     });
     const meetup = meetups.find((item) => {
@@ -118,7 +131,7 @@ const MeetupModel = {
 
     return {
       ...meetup,
-      reviews: attendants,
+      Attendants,
     };
   },
 };
