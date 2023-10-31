@@ -1,6 +1,6 @@
-import { useNavigate } from 'react-router-dom';
-import { MeetupFromDb } from '../../types';
-import { APP_URL } from '../../utils';
+import { useNavigate } from "react-router-dom";
+import { MeetupFromDb } from "../../types";
+import { APP_URL } from "../../utils";
 
 function MeetupItems(props: { meetupArr: MeetupFromDb[] }) {
   const { meetupArr } = props;
@@ -8,7 +8,7 @@ function MeetupItems(props: { meetupArr: MeetupFromDb[] }) {
 
   function seeMeetup(meetup: MeetupFromDb) {
     return function () {
-      navigate(APP_URL + 'detail', { state: { meetup: meetup } });
+      navigate(APP_URL + "detail", { state: { meetupId: meetup.SK } });
     };
   }
 
@@ -18,12 +18,12 @@ function MeetupItems(props: { meetupArr: MeetupFromDb[] }) {
         return (
           <li
             key={meetup.PK}
-            className='meetups'
+            className="meetups"
             onClick={() => seeMeetup(meetup)()}
           >
-            <h2 className='meetups__meetupsTitle'>{meetup.Title}</h2>
+            <h2 className="meetups__meetupsTitle">{meetup.Title}</h2>
             <p>
-              {meetup.StartTime} | {meetup.Location} | {meetup.Description} |{' '}
+              {meetup.StartTime} | {meetup.Location} | {meetup.Description} |{" "}
               {meetup.Host}
             </p>
           </li>
