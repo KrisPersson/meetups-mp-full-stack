@@ -13,7 +13,6 @@ type Props = {
 
 export default function Header(props: Props) {
   const navigate = useNavigate();
-  // console.log('Header', APP_URL + 'detail');
 
   return (
     <header className="header">
