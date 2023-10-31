@@ -1,47 +1,73 @@
-.reviews-view{
-    display: flex;  
-    flex-direction: column;
-    align-items: center;
+.reviews-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 25rem;
 }
 
+.show-old-reviews-area {
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
-.show-old-reviews-area{
-    height: 15rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    &__review-h2{
-        margin-bottom: 0;
-        margin-top: 0;
+  border-radius: 4px;
+  &__review-h2 {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+  &__review-h3 {
+    margin: 0;
+    overflow-y: scroll;
+    border: 1px solid #557c9e;
+    border-radius: 4px;
+    padding: 0.5rem;
+    &__reviewItems {
+      padding-left: 1rem;
+      padding-right: 1rem;
+      margin-top: 0;
     }
-    &__review-h3{
-        margin-top: 0;
-        overflow-y: scroll;
-        &__reviewItems{
-            padding-left: 3rem;
-            padding-right: 3rem;
-            margin-top: 0;
-        }
-    }
+  }
 }
 
-.show-new-review-area{
-display: flex;
-flex-direction: column;
-align-items: center;
-padding-top: 1rem;
-    &__rating{
-        &__star:hover{
-        cursor: pointer;
-        background-color: #8b4949;
-        }
-        &__star:focus{
-            background-color: #8b4949;
-        }
+.show-new-review-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1rem;
+  &__rating {
+    &__star {
+      background-color: #efdfef;
+      border: 1px solid #557c9e;
     }
-    &__submit{
+    &__star:hover {
+      cursor: pointer;
+      background-color: #9aa4c2;
+    }
+    &__star:focus {
+      background-color: #9aa4c2;
+    }
+  }
+  &__submit {
     cursor: pointer;
-    }
+    border: 1px solid #557c9e;
+    color: #557c9e;
+    background-color: #efdfef;
+    border-radius: 3px;
+  }
+  &__reviewing {
+    background-color: #ffffff;
+    border: 1px solid #557c9e;
+    margin: 1rem;
+    border-radius: 2px;
+  }
+}
+.writeReview {
+  border: 1px solid #557c9e;
+  color: #557c9e;
+  background-color: #efdfef;
+  border-radius: 3px;
+  margin-top: 1rem;
 }

@@ -93,13 +93,13 @@ export default function Reviews() {
                     <div className="show-new-review-area__rating">
                         <button className="show-new-review-area__rating__star" onClick={() => setRating(1)}>★</button>
                         <button className="show-new-review-area__rating__star" onClick={() => setRating(2)}>★</button>
-                        <button className="show-new-review-rea__rating__star" onClick={() => setRating(3)}>★</button>
+                        <button className="show-new-review-area__rating__star" onClick={() => setRating(3)}>★</button>
                         <button className="show-new-review-area__rating__star" onClick={() => setRating(4)}>★</button>
                         <button className="show-new-review-area__rating__star" onClick={() => setRating(5)}>★</button>
                     </div >
 
-                    <textarea className="reviewing" onChange={(e) => setReviewing(e.target.value)} placeholder="Skriv din recension här..." />
-                    <input className="name" onChange={(e) => setName(e.target.value)} placeholder="Namn" />
+                    <textarea className="show-new-review-area__reviewing" onChange={(e) => setReviewing(e.target.value)} placeholder="Skriv din recension här..." />
+
                     <button className="show-new-review-area__submit" onClick={sendNewReviewToDB}>Skicka recension</button>
 
 
