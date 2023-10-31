@@ -16,6 +16,7 @@ export default function Reviews() {
   }
   // console.log(rating, reviewing, name);
 
+
   const reviews = [
     {
       name: "Kalle",
@@ -86,6 +87,7 @@ export default function Reviews() {
         </h3>
       </div>
 
+
       {newReview ? (
         <section className="show-new-review-area">
           <div className="show-new-review-area__rating">
@@ -102,7 +104,7 @@ export default function Reviews() {
               ★
             </button>
             <button
-              className="show-new-review-rea__rating__star"
+              className="show-new-review-area__rating__star"
               onClick={() => setRating(3)}
             >
               ★

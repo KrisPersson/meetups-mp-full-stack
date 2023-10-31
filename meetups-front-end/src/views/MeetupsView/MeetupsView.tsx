@@ -90,8 +90,8 @@ export default function MeetupsView() {
       searchInput.length > 0
         ? [...searchedItems]
         : meetupItems.length > 0
-        ? [...meetupItems]
-        : [];
+          ? [...meetupItems]
+          : [];
 
     if (!isFilterFullyOff()) {
       if (filter.date) {
@@ -141,7 +141,7 @@ export default function MeetupsView() {
     <div className="view meetups-view">
       <Header showHomeBtn={false} showMyPageBtn={true} onClick={null} />
       <section className="meetups-container">
-        <h1>MeetApp</h1>
+        <h1 className="meetup-h1">MeetApp</h1>
         <div className="meetups-container__search-container">
           <input
             type="text"
