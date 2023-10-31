@@ -15,6 +15,21 @@ export async function apiGetUpcomingMeetUps(token: string) {
   }
 }
 
+export async function apiGetSpecificMeetup(token: string, meetupId: string) {
+  try {
+    const response = await fetch(BASE_URL + `/meetups/${meetupId}`, {
+      method: 'GET',
+      headers: {
+        authorization: `Bearer ${token}`,
+      },
+    });
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return error;
+  }
+}
+
 export async function apiAttendLeaveMeetup(
   token: string,
   meetupId: string,
