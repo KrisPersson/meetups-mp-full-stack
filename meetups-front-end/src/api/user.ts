@@ -1,4 +1,4 @@
-import { BASE_URL } from './index';
+import { BASE_URL, logout, saveUser } from './index';
 
 export async function apiSignup(username: string, password: string) {
   try {
@@ -8,8 +8,6 @@ export async function apiSignup(username: string, password: string) {
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
-    localStorage.setItem('userToken', '');
-    localStorage.setItem('username', '');
     return data;
   } catch (error) {
     console.log(error);
@@ -24,8 +22,7 @@ export async function apiLogin(username: string, password: string) {
       body: JSON.stringify({ username, password }),
     });
     const data = await response.json();
-    localStorage.setItem('userToken', data?.token);
-    localStorage.setItem('username', data?.username);
+    saveUser(data.token, data.username);
     return data;
   } catch (error) {
     console.log(error);
@@ -41,10 +38,12 @@ export async function apiGetUserProfile(token: string) {
       },
     });
     const data = await response.json();
+    if (response.status === 401) {
+      logout();
+    }
+
     return data;
   } catch (error) {
-    console.log(error);
-
     return error;
   }
 }

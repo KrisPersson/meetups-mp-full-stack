@@ -15,7 +15,7 @@ const leaveMeetUp: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
   const { username } = event;
   const meetup = await MeetupModel.findMeetup(meetupId);
   if (!meetup) {
-    return response.error(400, 'Meetup does not exist');
+    return response.error(404, 'Meetup does not exist');
   }
   const hasEnded = MeetupModel.hasEnded(meetup.StartTime);
   if (hasEnded) {
