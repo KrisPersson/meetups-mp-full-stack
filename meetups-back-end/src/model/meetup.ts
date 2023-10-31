@@ -122,7 +122,7 @@ const MeetupModel = {
   },
 
   aggregateReviews: (meetups: any[]) => {
-    const attendants = meetups.filter((item) => {
+    const Attendants = meetups.filter((item) => {
       return item.SK.includes('USER#');
     });
     const meetup = meetups.find((item) => {
@@ -131,7 +131,7 @@ const MeetupModel = {
 
     return {
       ...meetup,
-      reviews: attendants,
+      Attendants,
     };
   },
 };

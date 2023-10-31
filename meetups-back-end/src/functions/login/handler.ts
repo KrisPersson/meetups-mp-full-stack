@@ -15,7 +15,7 @@ const login: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     const { username, password } = event.body;
     const user = await UserModel.getUser(username);
     if (!user) {
-      return response.error(400, `Username ${username} does not exist!`);
+      return response.error(404, `Username ${username} does not exist!`);
     }
     const isMatch = await UserModel.checkPassword(password, user.Password);
     if (!isMatch) {
