@@ -19,6 +19,7 @@ const profile: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
 
     for (let index = 0; index < listOfMeetups.length; index++) {
       const { PK } = listOfMeetups[index];
+      // includes meetup detail and all attends of that meetup
       const list = await MeetupModel.getMeetupsUserAttending(PK);
 
       const sortedMeetup = MeetupModel.aggregateReviews(list);

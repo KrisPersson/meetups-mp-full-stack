@@ -17,6 +17,19 @@ const MeetupModel = {
     return data.Item;
   },
 
+  getAllAttendantsOfMeetup: async (meetupId: string) => {
+    const { Items } = await db
+      .scan({
+        TableName: process.env.TABLE,
+        FilterExpression: 'PK = :PK AND begins_with(SK, :SK)',
+        ExpressionAttributeValues: {
+          ':PK': `MEETUP#${meetupId}`,
+          ':SK': 'USER#',
+        },
+      })
+      .promise();
+    return Items;
+  },
   getAttendant: async (meetupId: string, username: string) => {
     const { Item } = await db
       .get({

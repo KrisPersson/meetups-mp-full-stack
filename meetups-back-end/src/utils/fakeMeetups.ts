@@ -82,7 +82,7 @@ export const createRandomMeetups = (amount: number = 6) => {
 };
 
 function generateRandomNumber() {
-  return Math.floor(Math.random() * 10);
+  return Math.ceil(Math.random() * 10);
 }
 
 function createStartTime(randomExtraDays: number) {
