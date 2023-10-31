@@ -111,7 +111,7 @@ export default function MeetupDetailView() {
         {/* <h2>
           Recensioner: <ul>{reviewItems}</ul>{' '}
         </h2> */}
-        <Reviews />
+        <Reviews meetupId={location.state.meetupId} />
       </section>
       {registered ? (
         <Footer buttonText="Avregistrera mig!" onClick={clickToRegOrUnreg} />

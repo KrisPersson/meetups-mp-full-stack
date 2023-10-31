@@ -1,17 +1,25 @@
 import "./Reviews.scss";
 import { useState } from "react";
+import { apiSubmitReview } from "../../api/meetups";
 
-export default function Reviews() {
+export default function Reviews({ meetupId }: { meetupId: string }) {
   const [newReview, setNewReview] = useState(false);
   const [rating, setRating] = useState(0);
   const [reviewing, setReviewing] = useState("");
-  const [name, setName] = useState("");
+  //   const [name, setName] = useState("");
 
   function switchToNewReview() {
     newReview ? setNewReview(false) : setNewReview(true);
   }
   function sendNewReviewToDB() {
     newReview ? setNewReview(false) : setNewReview(true);
+    apiSubmitReview(
+      localStorage.getItem("userToken") || "",
+      meetupId,
+      reviewing,
+      rating
+    );
+
     //skicka rating, reviewing, name och SK till databasen
   }
   // console.log(rating, reviewing, name);
@@ -125,11 +133,6 @@ export default function Reviews() {
             className="reviewing"
             onChange={(e) => setReviewing(e.target.value)}
             placeholder="Skriv din recension här..."
-          />
-          <input
-            className="name"
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Namn"
           />
           <button
             className="show-new-review-area__submit"
