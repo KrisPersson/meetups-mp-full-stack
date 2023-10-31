@@ -31,6 +31,7 @@ interface Props {
   thisIsLoginSignUpPage?: boolean;
   switchLoginSignUp?: () => void;
   onClick: () => void;
+  isFullyBooked?: boolean;
 }
 
 export default function Footer(props: Props) {

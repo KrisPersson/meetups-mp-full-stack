@@ -1,6 +1,6 @@
 import "./MeetupsView.scss";
 import Header from "../../components/Header/Header";
-import { apiGetUpcomingMeetUps } from "../../api/meetups";
+import { apiGetUpcomingMeetUps, apiGetSpecificMeetup } from "../../api/meetups";
 // import meetupArr from "../../components/Meetups/Meetups";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -33,7 +33,7 @@ export default function MeetupsView() {
   function seeMeetup(meetup: MeetupFromDb) {
     return function () {
       navigate(APP_URL + "detail", {
-        state: { meetup: meetup },
+        state: { meetupId: meetup.SK },
       });
     };
   }

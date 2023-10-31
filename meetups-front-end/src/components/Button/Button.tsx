@@ -1,4 +1,4 @@
-import './Button.scss';
+import "./Button.scss";
 
 interface ButtonProps {
   children?: React.ReactNode;
@@ -12,6 +12,7 @@ interface ButtonProps {
   fontWeight?: string;
   padding?: string;
   onClick: () => void;
+  isFullyBooked?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -26,6 +27,7 @@ const Button: React.FC<ButtonProps> = ({
   fontWeight,
   padding,
   onClick,
+  isFullyBooked,
 }) => {
   return (
     <button
@@ -39,9 +41,10 @@ const Button: React.FC<ButtonProps> = ({
         border: border,
         fontFamily: fontFamily,
         fontWeight: fontWeight,
-        padding: padding
+        padding: padding,
       }}
       onClick={onClick}
+      disabled={isFullyBooked || false}
     >
       {children}
     </button>
