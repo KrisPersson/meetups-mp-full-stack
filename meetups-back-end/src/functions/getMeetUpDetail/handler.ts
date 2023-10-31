@@ -16,12 +16,10 @@ const getMeetUpDetail: ValidatedEventAPIGatewayProxyEvent<
     return response.error(404, 'Meetup not found');
   }
   const attendants = await MeetupModel.getAllAttendantsOfMeetup(meetupId);
-  const users = attendants.map((attendant) =>
-    attendant.SK.replace('USER#', '')
-  );
+
   let data = {
     ...meetup,
-    Attendants: users,
+    Attendants: attendants,
   };
 
   return response.success({

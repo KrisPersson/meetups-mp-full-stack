@@ -15,21 +15,21 @@ const profile: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
     past: [],
   };
   try {
-    const listOfMeetups = await MeetupModel.getHistory(username);
+    const history = await MeetupModel.getHistory(username);
+    if (history.length > 0) {
+      const meetupIdArray = history.map((item) => {
+        return item.PK.split('#')[1];
+      });
+      const meetups = await MeetupModel.getMultipleMeetups(meetupIdArray);
 
-    if (listOfMeetups.length > 0) {
-      for (let index = 0; index < listOfMeetups.length; index++) {
-        const { PK } = listOfMeetups[index];
-        // includes meetup detail and all attends of that meetup
-        const list = await MeetupModel.getMeetupsUserAttending(PK);
-
-        const sortedMeetup = MeetupModel.aggregateReviews(list);
-        const hasEnded = MeetupModel.hasEnded(sortedMeetup.StartTime);
+      for (let index = 0; index < meetups.length; index++) {
+        // const sortedMeetup = MeetupModel.aggregateReviews(list);
+        const hasEnded = MeetupModel.hasEnded(meetups[index].StartTime);
         if (hasEnded) {
-          data.past.push(sortedMeetup);
+          data.past.push(meetups[index]);
           continue;
         }
-        data.upcoming.push(sortedMeetup);
+        data.upcoming.push(meetups[index]);
       }
     }
     return response.success({

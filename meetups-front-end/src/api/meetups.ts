@@ -66,16 +66,16 @@ export async function apiAttendLeaveMeetup(
 export async function apiSubmitReview(
   token: string,
   meetupId: string,
-  review: string,
+  reviewing: string,
   rating: number
 ) {
   const body = {
     meetupId,
-    review,
+    reviewing,
     rating,
   };
   try {
-    const response = await fetch(BASE_URL + `/review`, {
+    const response = await fetch(BASE_URL + `/reviews`, {
       method: 'POST',
       headers: {
         authorization: `Bearer ${token}`,

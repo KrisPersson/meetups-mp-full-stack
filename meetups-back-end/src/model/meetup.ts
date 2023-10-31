@@ -108,17 +108,24 @@ const MeetupModel = {
 
     return data.Items;
   },
-  getMeetupsUserAttending: async (PK: string = '') => {
-    const data = await db
-      .scan({
-        TableName: process.env.TABLE,
-        FilterExpression: 'PK = :PK ',
-        ExpressionAttributeValues: {
-          ':PK': PK,
+  getMultipleMeetups: async (meetups: string[]) => {
+    const request = meetups.map((item) => {
+      return {
+        PK: `MEETUP#${item}`,
+        SK: item,
+      };
+    });
+    const { Responses } = await db
+      .batchGet({
+        RequestItems: {
+          [process.env.TABLE]: {
+            Keys: request,
+          },
         },
       })
       .promise();
-    return data.Items;
+
+    return Responses[process.env.TABLE];
   },
 
   aggregateReviews: (meetups: any[]) => {

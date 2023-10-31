@@ -56,5 +56,5 @@ const submitReview: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (
 };
 
 export const main = middyfy(submitReview)
-  .use(validation(reviewSchema))
-  .use(checkToken());
+  .use(checkToken())
+  .use(validation(reviewSchema));

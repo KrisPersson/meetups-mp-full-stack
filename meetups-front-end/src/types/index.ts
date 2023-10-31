@@ -23,14 +23,14 @@ export interface MeetupFromDb {
   Category?: string;
 }
 
-interface Attendant {
+export interface Attendant {
   SK: string;
   PK: string;
-  rating?: number;
-  review?: string;
+  Rating?: number;
+  Reviewing?: string;
 }
 
-interface MeetupDetailWithReviews extends MeetupFromDb {
+export interface MeetupDetailWithReviews extends MeetupFromDb {
   Attendants: Attendant[];
 }
 

@@ -1,7 +1,7 @@
-import { APP_URL } from "../../utils";
-import "./Header.scss";
+import { APP_URL } from '../../utils';
+import './Header.scss';
 //import Button from "../Button/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 type Props = {
   showHomeBtn?: boolean;
@@ -15,27 +15,27 @@ export default function Header(props: Props) {
   const navigate = useNavigate();
 
   return (
-    <header className="header">
+    <header className='header'>
       {props.showHomeBtn ? (
-        <div className="home">
-          <h1 className="nav-home" onClick={() => navigate(`${APP_URL}`)}>
+        <div className='home'>
+          <h1 className='nav-home' onClick={() => navigate(`${APP_URL}`)}>
             HOME
           </h1>
         </div>
       ) : null}
       {props.showMyPageBtn ? (
-        <div className="myPage">
+        <div className='myPage'>
           <h1
-            className="nav-myPage"
-            onClick={() => navigate(APP_URL + "profile")}
+            className='nav-myPage'
+            onClick={() => navigate(APP_URL + 'profile')}
           >
             MIN SIDA
           </h1>
         </div>
       ) : null}
       {props.loginSignUpHeader ? (
-        <div className="nav-login-signup">
-          <h1 className="nav-login-signup-text">MEETUP</h1>
+        <div className='nav-login-signup'>
+          <h1 className='nav-login-signup-text'>MEETUP</h1>
         </div>
       ) : null}
     </header>

@@ -29,7 +29,7 @@ export const reviewSchema = yup
       .ensure()
       .trim()
       .nonNullable()
-      .required('Username is required'),
+      .required('Reviewing is required'),
     rating: yup
       .number()
       .min(1, 'Rating must be greater than or equal to 1')
