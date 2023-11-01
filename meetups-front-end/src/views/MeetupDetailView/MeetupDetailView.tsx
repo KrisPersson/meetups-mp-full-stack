@@ -1,12 +1,12 @@
-import './MeetupDetailView.scss';
-import Footer from '../../components/Footer/Footer';
-import Header from '../../components/Header/Header';
-import { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Attendant, MeetupDetailWithReviews } from '../../types/index';
-import Reviews from '../../components/Reviews/Reviews';
-import { APP_URL } from '../../utils';
-import { apiGetSpecificMeetup, apiAttendLeaveMeetup } from '../../api/meetups';
+import "./MeetupDetailView.scss";
+import Footer from "../../components/Footer/Footer";
+import Header from "../../components/Header/Header";
+import { useState, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Attendant, MeetupDetailWithReviews } from "../../types/index";
+import Reviews from "../../components/Reviews/Reviews";
+import { APP_URL } from "../../utils";
+import { apiGetSpecificMeetup, apiAttendLeaveMeetup } from "../../api/meetups";
 
 export default function MeetupDetailView() {
   const location = useLocation();
@@ -27,7 +27,7 @@ export default function MeetupDetailView() {
 
   async function fetchSpecificMeetup(meetupId: string) {
     const dbMeetup = await apiGetSpecificMeetup(
-      localStorage.getItem('userToken') || '',
+      localStorage.getItem("userToken") || "",
       meetupId
     );
     if (dbMeetup.success) setMeetupState({ ...dbMeetup.data });
@@ -40,14 +40,14 @@ export default function MeetupDetailView() {
   }
 
   async function clickToRegOrUnreg() {
-    const token = localStorage.getItem('userToken') || '';
+    const token = localStorage.getItem("userToken") || "";
     if (registered) {
-      await apiAttendLeaveMeetup(token, location.state.meetupId, 'leave');
-      console.log('Test: Du är nu avanmäld!');
+      await apiAttendLeaveMeetup(token, location.state.meetupId, "leave");
+      console.log("Test: Du är nu avanmäld!");
       setRegistered(false);
     } else {
-      await apiAttendLeaveMeetup(token, location.state.meetupId, 'attend');
-      console.log('Test: Du är nu anmäld!');
+      await apiAttendLeaveMeetup(token, location.state.meetupId, "attend");
+      console.log("Test: Du är nu anmäld!");
       setRegistered(true);
     }
   }
@@ -62,9 +62,9 @@ export default function MeetupDetailView() {
   const attendants = meetupState?.Attendants;
 
   return (
-    <div className='view meetupDetail-view'>
+    <div className="view meetupDetail-view">
       <Header showHomeBtn={true} showMyPageBtn={true} />
-      <section className='detail-container'>
+      <section className="detail-container">
         <h1>{title}</h1>
         <h2>Datum: {date}</h2>
         <h2>Plats: {venue}</h2>
@@ -73,21 +73,17 @@ export default function MeetupDetailView() {
         <h2>
           Anmälda: {numberOfAttendees}/{maxNumberOfAttendees}
         </h2>
-        {/* <h2>
-          Recensioner: <ul>{reviewItems}</ul>{' '}
-        </h2> */}
         {date && date < new Date().toISOString() ? (
           <Reviews attendants={attendants || []} meetupId={meetupState.SK} />
         ) : null}
       </section>
-
       <>
         {date && date < new Date().toISOString() ? null : registered ? (
-          <Footer buttonText='Avregistrera mig!' onClick={clickToRegOrUnreg} />
+          <Footer buttonText="Avregistrera mig!" onClick={clickToRegOrUnreg} />
         ) : (
           <Footer
             isFullyBooked={numberOfAttendees === maxNumberOfAttendees}
-            buttonText='Anmäl mig!'
+            buttonText="Anmäl mig!"
             onClick={clickToRegOrUnreg}
           />
         )}
