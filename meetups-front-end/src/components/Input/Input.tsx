@@ -47,9 +47,6 @@ function InsertTypeOfField({
         type="text"
         id={htmlFor}
         className="input-text-field"
-        // defaultValue=""
-        // ref={usernameInput}
-        // onChange={(e) => onChange && onChange(e)}
         value={inputValue}
         onChange={(e) => setInputValue && setInputValue(e.target.value)}
       />
