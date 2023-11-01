@@ -1,7 +1,6 @@
 import "./MeetupsView.scss";
 import Header from "../../components/Header/Header";
-import { apiGetUpcomingMeetUps, apiGetSpecificMeetup } from "../../api/meetups";
-// import meetupArr from "../../components/Meetups/Meetups";
+import { apiGetUpcomingMeetUps } from "../../api/meetups";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { MeetupFromDb } from "../../types/index";
@@ -36,10 +35,6 @@ export default function MeetupsView() {
         state: { meetupId: meetup.SK },
       });
     };
-  }
-
-  function handleClick() {
-    console.log("test");
   }
 
   function searchMeetups(value: string) {
@@ -90,8 +85,8 @@ export default function MeetupsView() {
       searchInput.length > 0
         ? [...searchedItems]
         : meetupItems.length > 0
-          ? [...meetupItems]
-          : [];
+        ? [...meetupItems]
+        : [];
 
     if (!isFilterFullyOff()) {
       if (filter.date) {
@@ -107,7 +102,7 @@ export default function MeetupsView() {
       if (filter.location) {
         toBeRendered = toBeRendered.filter((item) => {
           return (
-            item.Location.toLowerCase().trim() ===
+            item.Location?.toLowerCase().trim() ===
             filter.location.toLowerCase().trim()
           );
         });
