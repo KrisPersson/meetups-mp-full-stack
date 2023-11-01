@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import './LoginSignUpView.scss';
 import Footer from '../../components/Footer/Footer';
 import Header from '../../components/Header/Header';
@@ -8,11 +8,18 @@ import { useNavigate } from 'react-router-dom';
 import { APP_URL } from '../../utils';
 
 export default function LoginSignUpView() {
+  const token = localStorage.getItem('userToken') || '';
+  const navigate = useNavigate();
+
   const [loginView, setLoginView] = useState(true);
   const [usernameInput, setUsernameInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
-  const navigate = useNavigate();
 
+  React.useEffect(() => {
+    if (token) {
+      return navigate(APP_URL);
+    }
+  }, [token]);
   async function clickLoginSignUp() {
     let result;
 

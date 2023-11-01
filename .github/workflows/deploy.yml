@@ -7,6 +7,7 @@ on:
 
 env:
   VITE_APP_URL: '/meetups-mp-full-stack/'
+  VITE_APP_API_URL: 'https://auxgcm6h3g.execute-api.eu-north-1.amazonaws.com/api'
 permissions:
   contents: read
   packages: write

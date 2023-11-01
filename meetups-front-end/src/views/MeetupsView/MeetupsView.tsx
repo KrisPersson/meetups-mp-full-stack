@@ -68,9 +68,18 @@ export default function MeetupsView() {
       location: "",
       category: "",
     });
-    document.querySelector(".select-category").selectedIndex = 0;
-    document.querySelector(".select-location").selectedIndex = 0;
-    document.querySelector(".select-date").valueAsNumber = NaN;
+    const categorySelect = document.querySelector(
+      ".select-category"
+    ) as HTMLSelectElement;
+    categorySelect.selectedIndex = 0;
+    const locationSelect = document.querySelector(
+      ".select-location"
+    ) as HTMLSelectElement;
+    locationSelect.selectedIndex = 0;
+    const dateSelect = document.querySelector(
+      ".select-date"
+    ) as HTMLSelectElement;
+    dateSelect.selectedIndex = NaN;
   }
 
   function isFilterFullyOff() {
@@ -134,7 +143,7 @@ export default function MeetupsView() {
 
   return (
     <div className="view meetups-view">
-      <Header showHomeBtn={false} showMyPageBtn={true} onClick={null} />
+      <Header showHomeBtn={false} showMyPageBtn={true} />
       <section className="meetups-container">
         <h1 className="meetup-h1">MeetApp</h1>
         <div className="meetups-container__search-container">
