@@ -143,7 +143,7 @@ export default function MeetupsView() {
 
   return (
     <div className="view meetups-view">
-      <Header showHomeBtn={false} showMyPageBtn={true} onClick={null} />
+      <Header showHomeBtn={false} showMyPageBtn={true} />
       <section className="meetups-container">
         <h1 className="meetup-h1">MeetApp</h1>
         <div className="meetups-container__search-container">
