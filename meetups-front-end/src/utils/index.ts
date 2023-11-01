@@ -3,3 +3,6 @@ export function truncate(str: string, n: number) {
 }
 
 export const APP_URL = (import.meta.env.VITE_APP_URL as string) || '/';
+export const APP_API_URL =
+  (import.meta.env.VITE_APP_API_URL as string) ||
+  'https://auxgcm6h3g.execute-api.eu-north-1.amazonaws.com/api';

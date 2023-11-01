@@ -1,5 +1,6 @@
-export const BASE_URL =
-  'https://6lv4v5i9j8.execute-api.eu-north-1.amazonaws.com/api';
+import { APP_API_URL } from '../utils';
+
+export const BASE_URL = APP_API_URL;
 export * from './meetups';
 export * from './user';
 

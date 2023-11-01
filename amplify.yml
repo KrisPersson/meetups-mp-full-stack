@@ -1,0 +1,22 @@
+version: 1
+env:
+  VITE_APP_URL: '/meetups-mp-full-stack/'
+  VITE_APP_API_URL: 'https://auxgcm6h3g.execute-api.eu-north-1.amazonaws.com/api'
+permissions:
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - cd meetups-front-end
+        - npm ci
+    build:
+      commands:
+        - npm run build
+  artifacts:
+    # IMPORTANT - Please verify your build output directory
+    baseDirectory: /meetups-front-end/dist
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - /meetups-front-end/node_modules/**/*
