@@ -83,7 +83,11 @@ export default function MeetupDetailView() {
         ) : (
           <Footer
             isFullyBooked={numberOfAttendees === maxNumberOfAttendees}
-            buttonText="Anmäl mig!"
+            buttonText={
+              numberOfAttendees !== maxNumberOfAttendees
+                ? "Anmäl mig!"
+                : "Fullbokat!"
+            }
             onClick={clickToRegOrUnreg}
           />
         )}

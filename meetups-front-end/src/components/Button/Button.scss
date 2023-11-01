@@ -17,3 +17,16 @@
 .button:active {
   box-shadow: 2px 2px 3px #476d8f;
 }
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: default;
+}
+
+button:disabled:active,
+button[disabled]:active {
+  box-shadow: 4px 4px 10px #476d8f;
+}
