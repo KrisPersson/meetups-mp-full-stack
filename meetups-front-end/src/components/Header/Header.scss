@@ -1,0 +1,55 @@
+@import "../../scss/mixins";
+
+.header {
+  @include center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.home {
+  margin-left: 2rem;
+  margin-right: auto;
+}
+.myPage {
+  margin-right: 2rem;
+  margin-left: auto;
+}
+.nav-home {
+  cursor: pointer;
+}
+.nav-myPage {
+  cursor: pointer;
+}
+
+.nav-login-signup {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-login-signup-text {
+  font-size: 4rem;
+  text-shadow: 2px 4px 10px rgb(55, 55, 55);
+}
+
+// .header__logo {
+//   height: 3.2rem;
+//   width: 3.2rem;
+//   margin-right: 1rem;
+// }
+
+// .not-logged-in {
+//   justify-content: flex-end;
+//   padding: 2rem 2rem 0 0;
+//   align-self: flex-start;
+// }
+
+// .logo__title {
+//   font-size: 2.4rem;
+//   font-weight: 700;
+//   line-height: 3.2rem;
+//   color: #fff;
+//   @include mainFont;
+//   letter-spacing: 3.6px;
+// }
