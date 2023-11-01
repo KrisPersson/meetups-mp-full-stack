@@ -9,5 +9,5 @@ export default {
     },
     meetupId: { type: 'string' },
   },
-  required: ['reviewing', 'rating', 'SK'],
+  required: ['reviewing', 'rating', 'meetupId'],
 } as const;
