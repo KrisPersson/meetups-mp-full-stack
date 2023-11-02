@@ -8,6 +8,7 @@ import MeetupsView from './views/MeetupsView/MeetupsView';
 import MeetupDetailView from './views/MeetupDetailView/MeetupDetailView';
 import PrivateRoute from './router/privateRoute';
 import { APP_URL } from './utils';
+import ToastProvider from './utils/ToastProvider';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ToastProvider>
+      <RouterProvider router={router} />
+    </ToastProvider>
   </React.StrictMode>
 );

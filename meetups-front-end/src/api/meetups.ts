@@ -1,5 +1,5 @@
 import { BASE_URL, logout } from './index';
-
+import { toast } from 'react-toastify';
 export async function apiGetUpcomingMeetUps(token: string) {
   try {
     const response = await fetch(BASE_URL + '/meetups', {
@@ -9,6 +9,11 @@ export async function apiGetUpcomingMeetUps(token: string) {
       },
     });
     const data = await response.json();
+    if (!data.success) {
+      toast.error(data.message);
+    } else {
+      toast.success(data.message);
+    }
     if (response.status === 401) {
       logout();
     }
@@ -27,6 +32,11 @@ export async function apiGetSpecificMeetup(token: string, meetupId: string) {
       },
     });
     const data = await response.json();
+    if (!data.success) {
+      toast.error(data.message);
+    } else {
+      toast.success(data.message);
+    }
     if (response.status === 401) {
       logout();
     }
@@ -54,6 +64,11 @@ export async function apiAttendLeaveMeetup(
       body: JSON.stringify(body),
     });
     const data = await response.json();
+    if (!data.success) {
+      toast.error(data.message);
+    } else {
+      toast.success(data.message);
+    }
     if (response.status === 401) {
       logout();
     }
@@ -85,6 +100,11 @@ export async function apiSubmitReview(
     });
 
     const data = await response.json();
+    if (!data.success) {
+      toast.error(data.message);
+    } else {
+      toast.success(data.message);
+    }
     if (response.status === 401) {
       logout();
     }
