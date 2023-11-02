@@ -34,7 +34,7 @@ export default function Header(props: Props) {
       ) : null}
       {props.loginSignUpHeader ? (
         <div className="nav-login-signup">
-          <h1 className="nav-login-signup-text">MEETUP</h1>
+          <h1 className="nav-login-signup-text">MEETAPP</h1>
         </div>
       ) : null}
     </header>
